@@ -1,62 +1,646 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>smmkiwi.com - Sosyal Medya Yönetimi</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>smmkiwi — Sosyal Medya Büyütme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #0A0A08;
+  --off: #111110;
+  --card: #161614;
+  --border: rgba(255,255,255,.07);
+  --text: #F0EDE6;
+  --muted: #7A776F;
+  --lime: #C8F135;
+  --lime2: #B5DF1F;
+  --white: #FFFFFF;
+  --serif: 'Playfair Display', Georgia, serif;
+  --body: 'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  backdrop-filter: blur(20px);
+  background: rgba(10,10,8,.8);
+  border-bottom: 1px solid var(--border);
+  transition: padding .3s;
+}
+.logo {
+  font-family: var(--serif);
+  font-size: 22px; font-weight: 700;
+  color: var(--lime);
+  letter-spacing: -.5px;
+}
+.logo span { color: var(--text); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 13.5px; font-weight: 500; color: var(--muted);
+  text-decoration: none; letter-spacing: .3px;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--lime); color: var(--black);
+  border: none; border-radius: 99px;
+  padding: 9px 22px; font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: var(--body);
+  transition: all .2s;
+}
+.nav-cta:hover { background: var(--lime2); transform: scale(1.03); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 120px 48px 80px;
+  position: relative; overflow: hidden;
+  text-align: center;
+}
+
+/* Mesh background */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(200,241,53,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 60%, rgba(200,241,53,.05) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 30% at 20% 80%, rgba(200,241,53,.04) 0%, transparent 50%);
+}
+
+/* Noise */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0; opacity: .025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hero-inner { position: relative; z-index: 1; max-width: 800px; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(200,241,53,.1); border: 1px solid rgba(200,241,53,.25);
+  border-radius: 99px; padding: 6px 16px;
+  font-size: 12px; font-weight: 500; color: var(--lime);
+  margin-bottom: 28px;
+  animation: fadeUp .6s ease both;
+}
+.badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--lime);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(44px, 7vw, 82px);
+  font-weight: 900; line-height: 1.06;
+  letter-spacing: -2px; color: var(--text);
+  margin-bottom: 22px;
+  animation: fadeUp .6s .1s ease both;
+}
+.hero h1 em {
+  font-style: italic; color: var(--lime);
+}
+.hero p {
+  font-size: 17px; color: var(--muted); max-width: 520px;
+  margin: 0 auto 36px; line-height: 1.7;
+  animation: fadeUp .6s .2s ease both;
+}
+
+.hero-btns {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp .6s .3s ease both;
+}
+.btn-primary {
+  background: var(--lime); color: var(--black);
+  border: none; border-radius: 99px;
+  padding: 14px 32px; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: var(--body);
+  transition: all .2s; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--lime2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,241,53,.25); }
+
+.btn-ghost {
+  background: none; color: var(--text);
+  border: 1px solid var(--border); border-radius: 99px;
+  padding: 14px 32px; font-size: 14px; font-weight: 500;
+  cursor: pointer; font-family: var(--body);
+  transition: all .2s; text-decoration: none;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.04); }
+
+/* Stats bar */
+.stats-bar {
+  display: flex; gap: 0; justify-content: center;
+  margin-top: 72px; border: 1px solid var(--border);
+  border-radius: 20px; overflow: hidden; background: var(--card);
+  animation: fadeUp .6s .4s ease both;
+}
+.stat-item {
+  padding: 22px 36px; flex: 1; text-align: center;
+  border-right: 1px solid var(--border);
+  transition: background .2s;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: rgba(200,241,53,.04); }
+.stat-num {
+  font-family: var(--serif); font-size: 30px; font-weight: 700;
+  color: var(--lime); line-height: 1.1; display: block;
+}
+.stat-label { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+/* ── SECTION ── */
+section { padding: 100px 48px; }
+.section-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--lime);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: var(--serif); font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700; line-height: 1.15; letter-spacing: -1px;
+  color: var(--text); margin-bottom: 16px;
+}
+.section-title em { font-style: italic; color: var(--lime); }
+.section-sub { font-size: 16px; color: var(--muted); max-width: 500px; line-height: 1.7; }
+
+/* ── SERVICES ── */
+.services { background: var(--off); }
+.services-head { max-width: 1200px; margin: 0 auto 56px; }
+.services-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+}
+.service-card {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 36px 32px; border-radius: 0;
+  transition: all .25s; cursor: default; position: relative;
+  overflow: hidden;
+}
+.service-card:first-child { border-radius: 16px 0 0 16px; }
+.service-card:last-child { border-radius: 0 16px 16px 0; }
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--lime); transform: scaleX(0); transform-origin: left;
+  transition: transform .3s ease;
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover { background: #1A1A18; transform: translateY(-4px); }
+
+.card-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(200,241,53,.1); border: 1px solid rgba(200,241,53,.2);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; font-size: 20px;
+}
+.service-card h3 {
+  font-family: var(--serif); font-size: 22px; font-weight: 700;
+  color: var(--text); margin-bottom: 10px; letter-spacing: -.3px;
+}
+.service-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+.card-arrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 600; color: var(--lime);
+  margin-top: 20px; opacity: 0; transform: translateX(-4px);
+  transition: all .2s;
+}
+.service-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+
+/* ── PLATFORMS ── */
+.platforms { background: var(--black); }
+.platforms-inner { max-width: 1200px; margin: 0 auto; }
+.platforms-head { margin-bottom: 56px; }
+.platform-list {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+}
+.platform-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 28px;
+  display: flex; align-items: center; gap: 18;
+  transition: all .2s;
+}
+.platform-item:hover { border-color: rgba(200,241,53,.2); transform: translateX(4px); }
+.platform-emoji { font-size: 32px; width: 56px; text-align: center; flex-shrink: 0; }
+.platform-info h4 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.platform-info p { font-size: 13px; color: var(--muted); }
+.platform-badge {
+  margin-left: auto; flex-shrink: 0;
+  background: rgba(200,241,53,.1); color: var(--lime);
+  border: 1px solid rgba(200,241,53,.2);
+  border-radius: 99px; padding: 4px 12px;
+  font-size: 11px; font-weight: 600;
+}
+
+/* ── ABOUT ── */
+.about { background: var(--off); }
+.about-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.about-features { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
+.feature-row {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 18px; background: var(--card); border-radius: 12px;
+  border: 1px solid var(--border); transition: border-color .2s;
+}
+.feature-row:hover { border-color: rgba(200,241,53,.2); }
+.feature-check {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(200,241,53,.15); border: 1px solid rgba(200,241,53,.3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: var(--lime); font-size: 12px; font-weight: 700;
+}
+.feature-text strong { font-size: 14px; font-weight: 600; color: var(--text); display: block; }
+.feature-text span { font-size: 13px; color: var(--muted); }
+
+.about-visual {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 24px; padding: 40px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.about-visual::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px; width: 160px; height: 160px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(200,241,53,.1) 0%, transparent 70%);
+}
+.big-number {
+  font-family: var(--serif); font-size: 88px; font-weight: 900;
+  color: var(--lime); line-height: 1; letter-spacing: -4px; display: block;
+}
+.big-label { font-size: 16px; color: var(--muted); margin-top: 8px; }
+.divider { height: 1px; background: var(--border); margin: 28px 0; }
+.mini-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left; }
+.mini-stat .n { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--text); }
+.mini-stat .l { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--lime); padding: 80px 48px;
+  text-align: center;
+}
+.cta-section h2 {
+  font-family: var(--serif); font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900; color: var(--black); letter-spacing: -1.5px;
+  line-height: 1.1; margin-bottom: 14px;
+}
+.cta-section h2 em { font-style: italic; }
+.cta-section p { font-size: 16px; color: rgba(10,10,8,.6); margin-bottom: 32px; }
+.btn-dark {
+  background: var(--black); color: var(--lime);
+  border: none; border-radius: 99px;
+  padding: 16px 40px; font-size: 15px; font-weight: 700;
+  cursor: pointer; font-family: var(--body);
+  transition: all .2s; text-decoration: none; display: inline-block;
+}
+.btn-dark:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.3); }
+
+/* ── CONTACT ── */
+.contact { background: var(--black); }
+.contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contact-info .section-sub { margin-bottom: 32px; }
+.contact-ways { display: flex; flex-direction: column; gap: 12px; }
+.contact-way {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px; background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; transition: border-color .2s;
+}
+.contact-way:hover { border-color: rgba(200,241,53,.2); }
+.cw-icon { font-size: 20px; }
+.cw-text strong { font-size: 14px; font-weight: 600; color: var(--text); display: block; }
+.cw-text span { font-size: 12.5px; color: var(--muted); }
+
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+.form-group label { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: .5px; text-transform: uppercase; display: block; margin-bottom: 7px; }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; padding: 13px 16px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; color: var(--text); font-family: var(--body); font-size: 14px;
+  outline: none; transition: border-color .2s;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: rgba(200,241,53,.4); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-group select option { background: var(--card); }
+.form-submit {
+  background: var(--lime); color: var(--black);
+  border: none; border-radius: 10px; padding: 14px;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  font-family: var(--body); transition: all .2s;
+}
+.form-submit:hover { background: var(--lime2); transform: translateY(-1px); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--off); border-top: 1px solid var(--border);
+  padding: 28px 48px; display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--lime); }
+footer p { font-size: 12.5px; color: var(--muted); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  section { padding: 70px 20px; }
+  .hero { padding: 100px 20px 60px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card:first-child, .service-card:last-child { border-radius: 16px; }
+  .service-card { border-radius: 16px; }
+  .platform-list { grid-template-columns: 1fr; }
+  .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+  .stats-bar { flex-direction: column; }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .stat-item:last-child { border-bottom: none; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">smmkiwi</div>
-            <ul class="nav-links">
-                <li><a href="#home">Ana Sayfa</a></li>
-                <li><a href="#services">Hizmetler</a></li>
-                <li><a href="#about">Hakkımızda</a></li>
-                <li><a href="#contact">İletişim</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section id="home" class="hero">
-        <h1>Sosyal Medya Hesap Yönetimi</h1>
-        <p>Instagram, Twitter, Facebook ve TikTok takipçi hizmetleri</p>
-        <a href="#services" class="btn">Hizmetleri Gör</a>
-    </section>
+<!-- NAV -->
+<nav id="navbar">
+  <div class="logo">smm<span>kiwi</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Ana Sayfa</a></li>
+    <li><a href="#services">Hizmetler</a></li>
+    <li><a href="#about">Hakkımızda</a></li>
+    <li><a href="#contact">İletişim</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hemen Başla</button>
+</nav>
 
-    <section id="services" class="services">
-        <h2>Hizmetlerimiz</h2>
-        <div class="service-cards">
-            <div class="card">
-                <h3>Instagram Takipçi</h3>
-                <p>Gerçek ve aktif takipçiler</p>
-            </div>
-            <div class="card">
-                <h3>Twitter Takipçi</h3>
-                <p>Türkçe ve global takipçiler</p>
-            </div>
-            <div class="card">
-                <h3>Facebook Beğeni</h3>
-                <p>Hızlı teslim garantisi</p>
-            </div>
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Türkiye'nin #1 SMM Paneli
+    </div>
+    <h1>Sosyal Medyada<br/><em>Fark Yarat</em></h1>
+    <p>Instagram, Twitter, Facebook ve TikTok hesaplarınızı gerçek ve aktif takipçilerle büyütün. Hızlı teslim, 7/24 destek.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">
+        Hizmetleri Gör
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost">Canlı Destek</a>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-num">50K+</span>
+        <span class="stat-label">Mutlu Müşteri</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2M+</span>
+        <span class="stat-label">Teslim Edilen Takipçi</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">%99</span>
+        <span class="stat-label">Müşteri Memnuniyeti</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">7/24</span>
+        <span class="stat-label">Canlı Destek</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="services-head reveal">
+    <span class="section-tag">Hizmetlerimiz</span>
+    <h2 class="section-title">Her Platform için<br/><em>Özel Çözümler</em></h2>
+    <p class="section-sub">Gerçek ve aktif kullanıcılarla hesabınızı organik şekilde büyütün.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="card-icon">📸</div>
+      <h3>Instagram Takipçi</h3>
+      <p>Gerçek Türk ve global kullanıcılardan oluşan aktif takipçi paketi. Profil güvenliğiniz her zaman önceliğimiz.</p>
+      <div class="card-arrow">Pakete Bak <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="service-card">
+      <div class="card-icon">𝕏</div>
+      <h3>Twitter / X Takipçi</h3>
+      <p>Türkçe ve global takipçi seçenekleriyle hesabınızı organik büyütün. Günlük limitlerde güvenli teslim.</p>
+      <div class="card-arrow">Pakete Bak <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="service-card">
+      <div class="card-icon">👍</div>
+      <h3>Facebook Beğeni</h3>
+      <p>Sayfa ve gönderi beğenileri için hızlı teslim garantisi. Gerçek hesaplardan, düşme garantisiyle.</p>
+      <div class="card-arrow">Pakete Bak <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section class="platforms">
+  <div class="platforms-inner">
+    <div class="platforms-head reveal">
+      <span class="section-tag">Platformlar</span>
+      <h2 class="section-title">Desteklediğimiz<br/><em>Platformlar</em></h2>
+    </div>
+    <div class="platform-list reveal">
+      <div class="platform-item">
+        <div class="platform-emoji">📸</div>
+        <div class="platform-info" style="margin-left:18px">
+          <h4>Instagram</h4>
+          <p>Takipçi, beğeni, izlenme, yorum</p>
         </div>
-    </section>
+        <div class="platform-badge">Popüler</div>
+      </div>
+      <div class="platform-item">
+        <div class="platform-emoji">🎵</div>
+        <div class="platform-info" style="margin-left:18px">
+          <h4>TikTok</h4>
+          <p>Takipçi, beğeni, izlenme</p>
+        </div>
+        <div class="platform-badge">Trend</div>
+      </div>
+      <div class="platform-item">
+        <div class="platform-emoji">𝕏</div>
+        <div class="platform-info" style="margin-left:18px">
+          <h4>Twitter / X</h4>
+          <p>Takipçi, retweet, beğeni</p>
+        </div>
+        <div class="platform-badge">Hızlı</div>
+      </div>
+      <div class="platform-item">
+        <div class="platform-emoji">👥</div>
+        <div class="platform-info" style="margin-left:18px">
+          <h4>Facebook</h4>
+          <p>Sayfa beğenisi, gönderi etkileşimi</p>
+        </div>
+        <div class="platform-badge">Stabil</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="about" class="about">
-        <h2>Hakkımızda</h2>
-        <p>smmkiwi.com, sosyal medya hesaplarınız için güvenilir ve hızlı hizmet sunar.</p>
-    </section>
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="about-inner">
+    <div class="reveal">
+      <span class="section-tag">Neden Biz?</span>
+      <h2 class="section-title">Güvenilir,<br/><em>Hızlı, Gerçek</em></h2>
+      <p class="section-sub">2020'den beri 50.000'den fazla müşteriye hizmet verdik. Kaliteli ve güvenli büyüme.</p>
+      <div class="about-features">
+        <div class="feature-row">
+          <div class="feature-check">✓</div>
+          <div class="feature-text">
+            <strong>Gerçek Hesaplar</strong>
+            <span>Bot değil, gerçek ve aktif kullanıcılar</span>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-check">✓</div>
+          <div class="feature-text">
+            <strong>Hızlı Teslim</strong>
+            <span>Siparişler 15 dakika içinde başlar</span>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-check">✓</div>
+          <div class="feature-text">
+            <strong>Düşme Garantisi</strong>
+            <span>30 gün içinde düşen takipçiler iade edilir</span>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-check">✓</div>
+          <div class="feature-text">
+            <strong>7/24 Canlı Destek</strong>
+            <span>Her zaman yanınızdayız</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <span class="big-number">50K</span>
+      <p class="big-label">Mutlu Müşteri</p>
+      <div class="divider"></div>
+      <div class="mini-stats">
+        <div class="mini-stat"><div class="n">2M+</div><div class="l">Teslim edilen takipçi</div></div>
+        <div class="mini-stat"><div class="n">%99</div><div class="l">Memnuniyet oranı</div></div>
+        <div class="mini-stat"><div class="n">6 yıl</div><div class="l">Sektör deneyimi</div></div>
+        <div class="mini-stat"><div class="n">15dk</div><div class="l">Ortalama teslim</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="contact" class="contact">
-        <h2>İletişim</h2>
-        <p>Canlı destek butonuna tıklayarak bize ulaşın.</p>
-    </section>
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Hesabınızı Bugün<br/><em>Büyütmeye Başlayın</em></h2>
+  <p>Binlerce marka ve içerik üreticisi bize güveniyor.</p>
+  <a href="#contact" class="btn-dark">Ücretsiz Danışın →</a>
+</section>
 
-    <!-- Guardly Widget -->
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <span class="section-tag">İletişim</span>
+      <h2 class="section-title">Hemen<br/><em>Başlayalım</em></h2>
+      <p class="section-sub">Sorularınız için 7/24 canlı destek ekibimiz hazır.</p>
+      <div class="contact-ways">
+        <div class="contact-way">
+          <div class="cw-icon">💬</div>
+          <div class="cw-text"><strong>Canlı Destek</strong><span>Anında yanıt, 7/24 aktif</span></div>
+        </div>
+        <div class="contact-way">
+          <div class="cw-icon">📱</div>
+          <div class="cw-text"><strong>WhatsApp</strong><span>+90 (555) 000 00 00</span></div>
+        </div>
+        <div class="contact-way">
+          <div class="cw-icon">✉️</div>
+          <div class="cw-text"><strong>E-posta</strong><span>destek@smmkiwi.com</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-group">
+        <label>Ad Soyad</label>
+        <input type="text" placeholder="Adınız Soyadınız">
+      </div>
+      <div class="form-group">
+        <label>E-posta</label>
+        <input type="email" placeholder="ornek@email.com">
+      </div>
+      <div class="form-group">
+        <label>Hizmet</label>
+        <select>
+          <option>Instagram Takipçi</option>
+          <option>Twitter Takipçi</option>
+          <option>Facebook Beğeni</option>
+          <option>TikTok Takipçi</option>
+          <option>Diğer</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mesajınız</label>
+        <textarea placeholder="Nasıl yardımcı olabiliriz?"></textarea>
+      </div>
+      <button class="form-submit">Mesaj Gönder →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">smmkiwi</div>
+  <p>© 2026 smmkiwi.com — Tüm hakları saklıdır.</p>
+</footer>
+
+<!-- Guardly Widget -->
 <script src="https://cdn.guardly.com.tr/widget.js" data-site-id="dd4d6826-be30-4f7a-9b89-24abbf34bdb7"></script>
-    <footer>
-        <p>&copy; 2026 smmkiwi.com - Tüm hakları saklıdır.</p>
-    </footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Form submit
+document.querySelector('.form-submit').addEventListener('click', function(e) {
+  e.preventDefault();
+  this.textContent = '✓ Gönderildi!';
+  this.style.background = '#4CAF7D';
+  setTimeout(() => {
+    this.textContent = 'Mesaj Gönder →';
+    this.style.background = '';
+  }, 3000);
+});
+</script>
 </body>
 </html>
