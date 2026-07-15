@@ -5,14 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MANIFEST — Altı Kız. Bir Enerji.</title>
 <meta name="description" content="Manifest — Türkiye'nin en büyük kız grubu. Esin, Hilal, Lidya, Mina, Sueda ve Zeynep. Debut albüm Manifestival şimdi tüm platformlarda.">
-<meta name="theme-color" content="#08060D">
+<meta name="theme-color" content="#0e0e0e">
 <meta property="og:title" content="MANIFEST — Altı Kız. Bir Enerji.">
 <meta property="og:description" content="Türkiye'nin en büyük kız grubu. Debut albüm Manifestival şimdi tüm platformlarda.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23FF3D8A'/%3E%3Cstop offset='.55' stop-color='%238B5CF6'/%3E%3Cstop offset='1' stop-color='%233DE8FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='50' y='72' font-size='64' font-family='Arial Black,sans-serif' font-weight='900' text-anchor='middle' fill='url(%23g)'%3EM6%3C/text%3E%3C/svg%3E">
+<meta property="og:image" content="assets/img/og-logo.png">
+<link rel="icon" type="image/webp" href="assets/img/favicon.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
+<link rel="preload" as="image" href="assets/img/hero-1.webp">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -20,7 +22,7 @@
 <!-- Preloader -->
 <div class="preloader" aria-hidden="true">
   <div class="preloader-logo">
-    <span style="--i:0">M</span><span style="--i:1">A</span><span style="--i:2">N</span><span style="--i:3">I</span><span style="--i:4">F</span><span style="--i:5">E</span><span style="--i:6">S</span><span style="--i:7">T</span>
+    <img src="assets/img/logo.svg" alt="">
   </div>
   <div class="preloader-bar"></div>
 </div>
@@ -31,7 +33,9 @@
 <!-- ═══ NAV ═══ -->
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#top" aria-label="Manifest — ana sayfa">MANIFEST</a>
+    <a class="brand" href="#top" aria-label="Manifest — ana sayfa">
+      <img src="assets/img/logo.svg" alt="Manifest">
+    </a>
 
     <nav aria-label="Ana menü">
       <ul class="nav-links">
@@ -78,10 +82,8 @@
   <!-- ═══ HERO ═══ -->
   <section class="hero" aria-label="Manifest">
     <div class="hero-bg" aria-hidden="true">
-      <div class="blob blob--1"></div>
-      <div class="blob blob--2"></div>
-      <div class="blob blob--3"></div>
-      <div class="hero-grid-lines"></div>
+      <div class="hero-photo"></div>
+      <div class="hero-shade"></div>
       <div class="grain"></div>
     </div>
 
@@ -89,7 +91,9 @@
       <span class="dot"></span> Debut Albüm “Manifestival” Yayında
     </div>
 
-    <h1 class="hero-title">MANIFEST</h1>
+    <h1 class="hero-logo">
+      <img src="assets/img/logo.svg" alt="MANIFEST">
+    </h1>
 
     <p class="hero-sub">Altı Kız <strong>·</strong> Bir Enerji</p>
 
@@ -116,6 +120,24 @@
     </div>
   </section>
 
+  <!-- ═══ FOTOĞRAF ŞERİDİ ═══ -->
+  <section class="strip" aria-label="Galeri">
+    <div class="strip-track">
+      <div class="strip-item"><img src="assets/img/gal-1.webp" alt="Manifest sahne fotoğrafı" loading="lazy"></div>
+      <div class="strip-item"><img src="assets/img/gal-2.webp" alt="Manifest sahne fotoğrafı" loading="lazy"></div>
+      <div class="strip-item"><img src="assets/img/gal-3.webp" alt="Manifest sahne fotoğrafı" loading="lazy"></div>
+      <div class="strip-item"><img src="assets/img/gal-4.webp" alt="Manifest sahne fotoğrafı" loading="lazy"></div>
+      <div class="strip-item"><img src="assets/img/gal-5.webp" alt="Manifest sahne fotoğrafı" loading="lazy"></div>
+      <div class="strip-item"><img src="assets/img/gal-6.webp" alt="Manifest sahne fotoğrafı" loading="lazy"></div>
+      <div class="strip-item"><img src="assets/img/gal-1.webp" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="strip-item"><img src="assets/img/gal-2.webp" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="strip-item"><img src="assets/img/gal-3.webp" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="strip-item"><img src="assets/img/gal-4.webp" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="strip-item"><img src="assets/img/gal-5.webp" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="strip-item"><img src="assets/img/gal-6.webp" alt="" loading="lazy" aria-hidden="true"></div>
+    </div>
+  </section>
+
   <!-- ═══ HİKÂYE ═══ -->
   <section id="hikaye">
     <div class="wrap">
@@ -127,21 +149,21 @@
           <p>Bugün Manifest; modern pop sound’u, güçlü sahne enerjisi ve durdurulamaz kadın gücüyle Türkiye’nin en büyük kız grubu olarak kendi evrenini adım adım inşa ediyor.</p>
           <div class="stats">
             <div class="stat" data-reveal style="--d:1"><b data-count="6">0</b><small>Üye</small></div>
-            <div class="stat" data-reveal style="--d:2"><b data-count="1">0</b><small>Debut Albüm</small></div>
+            <div class="stat" data-reveal style="--d:2"><b data-count="2">0</b><small>Albüm</small></div>
             <div class="stat" data-reveal style="--d:3"><b>∞</b><small>Enerji</small></div>
           </div>
         </div>
 
         <div class="story-visual" data-reveal style="--d:2">
-          <svg class="story-sticker" viewBox="0 0 104 104" aria-hidden="true">
-            <defs><path id="circ" d="M52,52 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+          <svg class="story-sticker" viewBox="0 0 108 108" aria-hidden="true">
+            <defs><path id="circ" d="M54,54 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"/></defs>
             <text><textPath href="#circ">MANIFEST ✦ ALTI KIZ ✦ BİR ENERJİ ✦</textPath></text>
           </svg>
-          <div class="story-card" data-tilt="6">
-            <div class="story-quote">
-              <p>“Adım adım, birlikte bir dünya inşa ediyoruz.”</p>
-              <small>— Manifest</small>
-            </div>
+          <div class="story-photo">
+            <img src="assets/img/story-1.webp" alt="Manifest grubunun hikâye fotoğrafı" loading="lazy">
+          </div>
+          <div class="story-photo story-photo--front">
+            <img src="assets/img/story-2.webp" alt="Manifest grubunun sahne fotoğrafı" loading="lazy">
           </div>
         </div>
       </div>
@@ -160,12 +182,12 @@
         <div class="tl-item" data-reveal style="--d:2">
           <span class="tl-tag">Çıkış</span>
           <h3>İlk Single’lar</h3>
-          <p>“KTS” ve “Amatör” ile listeleri sarstılar; sosyal medyada bir fenomen doğdu.</p>
+          <p>“Zamansızdık” ve “Arıyo” ile listeleri sarstılar; sosyal medyada bir fenomen doğdu.</p>
         </div>
         <div class="tl-item" data-reveal style="--d:3">
           <span class="tl-tag">Zirve</span>
           <h3>Manifestival</h3>
-          <p>Debut albüm yayında. Sıradaki durak: sahneler, turneler ve dünya.</p>
+          <p>Debut albüm ve deluxe sürümü yayında. Sıradaki durak: sahneler, turneler ve dünya.</p>
         </div>
       </div>
     </div>
@@ -182,40 +204,65 @@
 
       <div class="album">
         <div class="album-art-wrap" data-reveal>
-          <div class="album-art" data-tilt="8">
-            <span class="title">MANIFESTIVAL</span>
+          <div class="album-art" data-tilt="7">
+            <img src="assets/img/cover-manifestival.webp" alt="Manifestival albüm kapağı">
           </div>
           <div class="album-vinyl" aria-hidden="true"></div>
         </div>
         <div class="album-info" data-reveal style="--d:2">
           <span class="album-tag">Debut Albüm</span>
           <h3>Manifestival</h3>
-          <p>Altı sesin tek bir enerjide buluştuğu ilk albümümüz. Pop, dans ve saf duygunun manifestosu — baştan sona bir festival.</p>
+          <p>Altı sesin tek bir enerjide buluştuğu ilk albümümüz. Pop, dans ve saf duygunun manifestosu — baştan sona bir festival. Deluxe sürümüyle birlikte şimdi tüm platformlarda.</p>
           <div class="album-ctas">
             <a class="btn btn--grad" href="https://open.spotify.com/intl-tr/album/15p1byCMc7mi42zFKUziBJ" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
               Albümü Dinle
             </a>
-            <a class="btn btn--ghost" href="https://open.spotify.com/playlist/2J2QZLNlmfnnEjixik6Y0q" target="_blank" rel="noopener">Resmî Playlist</a>
+            <a class="btn btn--ghost" href="https://open.spotify.com/intl-tr/album/0MpedZcfZuHSMgIHacjRFL" target="_blank" rel="noopener">Deluxe Sürüm</a>
           </div>
         </div>
       </div>
 
-      <div class="singles">
-        <a class="single" href="https://open.spotify.com/intl-tr/artist/2WjzL05RyqIk5n53sZc9nf" target="_blank" rel="noopener" data-reveal>
-          <span class="disc">KTS</span>
-          <span><b>KTS</b><small>Single</small></span>
-          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+      <div class="releases">
+        <a class="release" href="https://open.spotify.com/intl-tr/album/0MpedZcfZuHSMgIHacjRFL" target="_blank" rel="noopener" data-reveal>
+          <span class="cover"><img src="assets/img/cover-deluxe.webp" alt="Manifestival Deluxe kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="release-body"><b>Manifestival (Deluxe)</b><small>Albüm</small></span>
         </a>
-        <a class="single" href="https://open.spotify.com/intl-tr/artist/2WjzL05RyqIk5n53sZc9nf" target="_blank" rel="noopener" data-reveal style="--d:1">
-          <span class="disc">AM</span>
-          <span><b>Amatör</b><small>Single · Türkçe</small></span>
-          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <a class="release" href="https://open.spotify.com/album/6PI0ZfIq5UV3kLlpA5RkXE" target="_blank" rel="noopener" data-reveal style="--d:1">
+          <span class="cover"><img src="assets/img/cover-zamansizdik.webp" alt="Zamansızdık kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="release-body"><b>Zamansızdık</b><small>Single</small></span>
         </a>
-        <a class="single" href="https://open.spotify.com/intl-tr/artist/2WjzL05RyqIk5n53sZc9nf" target="_blank" rel="noopener" data-reveal style="--d:2">
-          <span class="disc">EN</span>
-          <span><b>Amateur</b><small>Single · English</small></span>
-          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <a class="release" href="https://open.spotify.com/album/48i9T2rTEgtK7K5j44Hq92" target="_blank" rel="noopener" data-reveal style="--d:2">
+          <span class="cover"><img src="assets/img/cover-ariyo.webp" alt="Arıyo kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="release-body"><b>Arıyo</b><small>Single</small></span>
+        </a>
+        <a class="release" href="https://open.spotify.com/intl-tr/track/67AMcEV9GTOlxs1NAvUDiU" target="_blank" rel="noopener" data-reveal style="--d:3">
+          <span class="cover"><img src="assets/img/cover-ruya.webp" alt="Rüya kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="release-body"><b>Rüya</b><small>Single</small></span>
+        </a>
+        <a class="release" href="https://open.spotify.com/intl-tr/track/2AhfH5OG1o12XEqGZUgEPT" target="_blank" rel="noopener" data-reveal style="--d:4">
+          <span class="cover"><img src="assets/img/cover-dahaiyi.webp" alt="Daha İyi kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="release-body"><b>Daha İyi</b><small>Single</small></span>
+        </a>
+        <a class="release" href="https://open.spotify.com/intl-tr/track/4eBE6hpwm7aJxIY4iwgwU8" target="_blank" rel="noopener" data-reveal>
+          <span class="cover"><img src="assets/img/cover-hileli.webp" alt="Hileli kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="release-body"><b>Hileli</b><small>Single</small></span>
+        </a>
+        <a class="release" href="https://open.spotify.com/intl-tr/track/4yHSp3OunMQmvSbIgy2Hhm" target="_blank" rel="noopener" data-reveal style="--d:1">
+          <span class="cover"><img src="assets/img/cover-amator.webp" alt="Amatör kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="release-body"><b>Amatör</b><small>Single</small></span>
+        </a>
+        <a class="release" href="https://open.spotify.com/intl-tr/track/1LJ8ODaoio5lJMgtXzALMw" target="_blank" rel="noopener" data-reveal style="--d:2">
+          <span class="cover"><img src="assets/img/cover-amateur.webp" alt="Amateur kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="release-body"><b>Amateur</b><small>Single · English</small></span>
+        </a>
+        <a class="release" href="https://open.spotify.com/intl-tr/track/7JOZ88jJbmx9TIzpPJBCqi" target="_blank" rel="noopener" data-reveal style="--d:3">
+          <span class="cover"><img src="assets/img/cover-basrol.webp" alt="Başrol Sensin kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="release-body"><b>Başrol Sensin</b><small>1. Yıl Özel</small></span>
+        </a>
+        <a class="release" href="https://open.spotify.com/intl-tr/track/7sqVyROuBW4xQc2ANlCLHJ" target="_blank" rel="noopener" data-reveal style="--d:4">
+          <span class="cover"><img src="assets/img/cover-zehir.webp" alt="Zehir Remix kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="release-body"><b>Zehir (Remix)</b><small>Arem &amp; Arman</small></span>
         </a>
       </div>
 
@@ -235,8 +282,11 @@
       </div>
 
       <div class="members">
-        <article class="member member--1" data-tilt="5" data-reveal>
-          <div class="member-visual"><div class="orbit"><i></i></div><span class="letter">E</span></div>
+        <article class="member member--1" data-reveal>
+          <div class="member-visual">
+            <span class="ghost-name" aria-hidden="true">Esin</span>
+            <img src="assets/img/esin.webp" alt="Esin Bahat" loading="lazy">
+          </div>
           <div class="member-body">
             <h3>Esin Bahat</h3>
             <div class="member-role">Duygu · Hakimiyet</div>
@@ -248,8 +298,11 @@
           </div>
         </article>
 
-        <article class="member member--2" data-tilt="5" data-reveal style="--d:1">
-          <div class="member-visual"><div class="orbit"><i></i></div><span class="letter">H</span></div>
+        <article class="member member--2" data-reveal style="--d:1">
+          <div class="member-visual">
+            <span class="ghost-name" aria-hidden="true">Hilal</span>
+            <img src="assets/img/hilal.webp" alt="Hilal Yelekçi" loading="lazy">
+          </div>
           <div class="member-body">
             <h3>Hilal Yelekçi</h3>
             <div class="member-role">Vokal · Fırtına</div>
@@ -261,8 +314,11 @@
           </div>
         </article>
 
-        <article class="member member--3" data-tilt="5" data-reveal style="--d:2">
-          <div class="member-visual"><div class="orbit"><i></i></div><span class="letter">L</span></div>
+        <article class="member member--3" data-reveal style="--d:2">
+          <div class="member-visual">
+            <span class="ghost-name" aria-hidden="true">Lidya</span>
+            <img src="assets/img/lidya.webp" alt="Lidya Pınar" loading="lazy">
+          </div>
           <div class="member-body">
             <h3>Lidya Pınar</h3>
             <div class="member-role">Zarafet · Güç</div>
@@ -274,8 +330,11 @@
           </div>
         </article>
 
-        <article class="member member--4" data-tilt="5" data-reveal>
-          <div class="member-visual"><div class="orbit"><i></i></div><span class="letter">M</span></div>
+        <article class="member member--4" data-reveal>
+          <div class="member-visual">
+            <span class="ghost-name" aria-hidden="true">Mina</span>
+            <img src="assets/img/mina.webp" alt="Mina Solak" loading="lazy">
+          </div>
           <div class="member-body">
             <h3>Mina Solak</h3>
             <div class="member-role">Cesaret · Ateş</div>
@@ -287,8 +346,11 @@
           </div>
         </article>
 
-        <article class="member member--5" data-tilt="5" data-reveal style="--d:1">
-          <div class="member-visual"><div class="orbit"><i></i></div><span class="letter">S</span></div>
+        <article class="member member--5" data-reveal style="--d:1">
+          <div class="member-visual">
+            <span class="ghost-name" aria-hidden="true">Sueda</span>
+            <img src="assets/img/sueda.webp" alt="Sueda Uluca" loading="lazy">
+          </div>
           <div class="member-body">
             <h3>Sueda Uluca</h3>
             <div class="member-role">Enerji · Ruh</div>
@@ -300,8 +362,11 @@
           </div>
         </article>
 
-        <article class="member member--6" data-tilt="5" data-reveal style="--d:2">
-          <div class="member-visual"><div class="orbit"><i></i></div><span class="letter">Z</span></div>
+        <article class="member member--6" data-reveal style="--d:2">
+          <div class="member-visual">
+            <span class="ghost-name" aria-hidden="true">Zeynep</span>
+            <img src="assets/img/zeynep.webp" alt="Zeynep Sude Oktay" loading="lazy">
+          </div>
           <div class="member-body">
             <h3>Zeynep Sude Oktay</h3>
             <div class="member-role">Sakinlik · Özgüven</div>
@@ -327,27 +392,27 @@
 
       <div class="video-grid">
         <a class="video-card video-card--main" href="https://www.youtube.com/@m6nifestgirls" target="_blank" rel="noopener" data-reveal>
-          <span class="ghost" aria-hidden="true">MANIFEST</span>
+          <span class="video-thumb"><img src="assets/img/video-1.webp" alt="" loading="lazy"></span>
           <span class="play-orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="video-meta">
             <b>YouTube Kanalımız</b>
-            <small>@m6nifestgirls · Klipler & Performanslar</small>
+            <small>@m6nifestgirls · Klipler &amp; Performanslar</small>
           </span>
         </a>
-        <a class="video-card video-card--a" href="https://www.youtube.com/@m6nifestgirls" target="_blank" rel="noopener" data-reveal style="--d:1">
-          <span class="ghost" aria-hidden="true">LIVE</span>
+        <a class="video-card video-card--sm" href="https://www.youtube.com/@m6nifestgirls" target="_blank" rel="noopener" data-reveal style="--d:1">
+          <span class="video-thumb"><img src="assets/img/video-2.webp" alt="" loading="lazy"></span>
           <span class="play-orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="video-meta">
             <b>Canlı Performanslar</b>
             <small>Sahne Enerjisi</small>
           </span>
         </a>
-        <a class="video-card video-card--b" href="https://www.youtube.com/@m6nifestgirls" target="_blank" rel="noopener" data-reveal style="--d:2">
-          <span class="ghost" aria-hidden="true">BACKSTAGE</span>
+        <a class="video-card video-card--sm" href="https://www.youtube.com/@m6nifestgirls" target="_blank" rel="noopener" data-reveal style="--d:2">
+          <span class="video-thumb"><img src="assets/img/video-3.webp" alt="" loading="lazy"></span>
           <span class="play-orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="video-meta">
             <b>Kamera Arkası</b>
-            <small>Vlog & Backstage</small>
+            <small>Vlog &amp; Backstage</small>
           </span>
         </a>
       </div>
@@ -358,7 +423,7 @@
   <section id="konser">
     <div class="wrap">
       <div class="tour-banner" data-reveal>
-        <span class="star" aria-hidden="true">✦</span>
+        <span class="tour-bg" aria-hidden="true"><img src="assets/img/concert.webp" alt="" loading="lazy"></span>
         <span class="star" aria-hidden="true">✦</span>
         <span class="star" aria-hidden="true">✦</span>
         <div class="eyebrow" style="justify-content:center"><span class="num">05</span> Konser</div>
@@ -370,7 +435,7 @@
           <span><i>✨</i> Sahne Prodüksiyonu</span>
           <span><i>💜</i> Unutulmaz Bir Gece</span>
         </div>
-        <a class="btn btn--grad" href="https://manifestgirlband.com/tr/biletlerimiz/" target="_blank" rel="noopener">
+        <a class="btn btn--light" href="https://manifestgirlband.com/tr/biletlerimiz/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 10V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 1 0 4v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 1 0-4zm-9 7.5h-2v-2h2zm0-4.5h-2v-2h2zm0-4.5h-2v-2h2z"/></svg>
           Bilet Al
         </a>
@@ -395,7 +460,7 @@
         </article>
         <article class="press" data-reveal style="--d:1">
           <div class="mark" aria-hidden="true">“</div>
-          <blockquote>“KTS” ile Manifest, yeni nesil pop'un enerjisini tek şarkıda topluyor — durdurulamaz bir yükseliş.</blockquote>
+          <blockquote>Manifest, yeni nesil pop'un enerjisini tek sahnede topluyor — durdurulamaz bir yükseliş.</blockquote>
           <cite>Fame Magazine</cite>
         </article>
         <article class="press" data-reveal style="--d:2">
@@ -474,7 +539,7 @@
 
     <div class="footer-mid">
       <div class="footer-brand">
-        <a class="brand" href="#top">MANIFEST</a>
+        <a href="#top" aria-label="Manifest — ana sayfa"><img src="assets/img/logo.svg" alt="Manifest"></a>
         <p>Altı kız, bir enerji. Türkiye'nin en büyük kız grubu.</p>
       </div>
 

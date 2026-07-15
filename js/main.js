@@ -32,20 +32,6 @@
     Promise.all([minDelay, loaded]).then(finishLoad);
   }
 
-  /* ── Split hero title into animatable letters ───────────── */
-  const title = $('.hero-title');
-  if (title) {
-    const text = title.textContent.trim();
-    title.textContent = '';
-    [...text].forEach((ch, i) => {
-      const span = document.createElement('span');
-      span.className = 'ch';
-      span.style.setProperty('--i', i);
-      span.textContent = ch;
-      title.appendChild(span);
-    });
-  }
-
   /* ── Custom cursor ──────────────────────────────────────── */
   if (finePointer && !reduceMotion) {
     const dot = document.createElement('div');
@@ -65,7 +51,7 @@
       requestAnimationFrame(loop);
     })();
 
-    const hoverables = 'a, button, .single, .soc, .member, input';
+    const hoverables = 'a, button, .release, .soc, .member, .video-card, .strip-item, input';
     document.addEventListener('mouseover', e => {
       document.body.classList.toggle('cursor-hover', !!e.target.closest(hoverables));
     });
