@@ -187,7 +187,18 @@
      bölüm çalar (iTunes preview). */
   const members = $$('.member');
   if (members.length) {
-    const SEG = 4.6;                       // üye başına saniye
+    /* Toz Pembe (resmî 30 sn önizleme) içinde her üyenin bölümü.
+       Kart sırası: Esin, Hilal, Lidya, Mina, Sueda, Zeynep.
+       Kimin hangi saniyede söylediğini biliyorsan start/dur değerlerini
+       buradan güncelle — başka hiçbir yere dokunman gerekmez. */
+    const PARTS = [
+      { name: 'Esin',   start:  0.0, dur: 5.0 },
+      { name: 'Hilal',  start:  5.0, dur: 5.0 },
+      { name: 'Lidya',  start: 10.0, dur: 5.0 },
+      { name: 'Mina',   start: 15.0, dur: 5.0 },
+      { name: 'Sueda',  start: 20.0, dur: 5.0 },
+      { name: 'Zeynep', start: 25.0, dur: 4.8 },
+    ];
     const audio = new Audio('assets/audio/toz-pembe-preview.mp3');
     audio.preload = 'auto';
     let fadeTimer = null, stopTimer = null, active = null;
@@ -217,14 +228,15 @@
     const playSegment = (card, idx) => {
       clearTimeout(stopTimer);
       members.forEach(m => m.classList.remove('is-playing'));
-      audio.currentTime = idx * SEG;
+      const part = PARTS[idx] || PARTS[0];
+      audio.currentTime = part.start;
       audio.volume = 0;
       const p = audio.play();
       if (p) p.then(() => {
         card.classList.add('is-playing');
         active = card;
         fadeTo(.85, 250);
-        stopTimer = setTimeout(() => stopSegment(card), SEG * 1000);
+        stopTimer = setTimeout(() => stopSegment(card), part.dur * 1000);
       }).catch(() => {}); // autoplay kilitliyse sessizce geç
     };
 
@@ -269,6 +281,54 @@
         });
       }
     });
+  }
+
+  /* ── Scroll animasyonları ─────────────────────────────────
+     1) Hero: fotoğraf ve logo farklı hızlarda kayar (parallax)
+     2) Galeri şeridi: scroll hızına göre eğilir (velocity skew)
+     3) Footer'daki dev MANIFEST: scroll ile yana kayar */
+  if (!reduceMotion) {
+    const heroPhoto = $('.hero-photo');
+    const heroLogo = $('.hero-logo');
+    const stripInner = $('.strip-inner');
+    const footerWord = $('.footer-word');
+    let lastY = scrollY, velocity = 0, fxTicking = false;
+
+    const scrollFX = () => {
+      const y = scrollY;
+      velocity = velocity * .82 + (y - lastY) * .18;   // yumuşatılmış hız
+      lastY = y;
+
+      // hero parallax (yalnızca hero görünürken)
+      if (y < innerHeight * 1.2) {
+        if (heroPhoto) heroPhoto.style.translate = `0 ${(y * .28).toFixed(1)}px`;
+        if (heroLogo)  heroLogo.style.translate  = `0 ${(y * .14).toFixed(1)}px`;
+      }
+
+      // şerit eğimi: hızlı scroll'da içerik eğilir, durunca düzelir
+      if (stripInner) {
+        const skew = Math.max(-7, Math.min(7, velocity * .28));
+        stripInner.style.transform = `skewX(${skew.toFixed(2)}deg)`;
+      }
+
+      // footer wordmark yatay kayma
+      if (footerWord) {
+        const r = footerWord.getBoundingClientRect();
+        if (r.top < innerHeight && r.bottom > 0) {
+          const p = 1 - (r.top + r.height / 2) / innerHeight; // 0..1
+          footerWord.style.translate = `${((p - .5) * 90).toFixed(1)}px 0`;
+        }
+      }
+
+      fxTicking = false;
+    };
+    addEventListener('scroll', () => {
+      if (!fxTicking) { fxTicking = true; requestAnimationFrame(scrollFX); }
+    }, { passive: true });
+    // hız sıfırlansın diye boşta da birkaç kare çalıştır
+    setInterval(() => {
+      if (Math.abs(velocity) > .1 && !fxTicking) { fxTicking = true; requestAnimationFrame(scrollFX); }
+    }, 120);
   }
 
   /* ── Hikâye fotoğrafları: scroll parallax ───────────────── */
