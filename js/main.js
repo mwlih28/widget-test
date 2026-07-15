@@ -187,6 +187,7 @@
      bölüm çalar (iTunes preview). */
   const members = $$('.member');
   let playMemberPart = null, stopMemberPart = null;   // modal da kullanır
+  let ttPause = null;                                  // pikap ile ses çakışmasın
   if (members.length) {
     /* Toz Pembe (resmî 30 sn önizleme) içinde her üyenin bölümü.
        Kart sırası: Esin, Hilal, Lidya, Mina, Sueda, Zeynep.
@@ -227,6 +228,7 @@
     };
 
     const playSegment = (card, idx) => {
+      ttPause?.();                     // pikap çalıyorsa duraklat
       clearTimeout(stopTimer);
       members.forEach(m => m.classList.remove('is-playing'));
       const part = PARTS[idx] || PARTS[0];
@@ -333,6 +335,114 @@
       ig: 'zeynep.okktay', tt: 'zeynep.okktay',
     },
   ];
+
+  /* ── Pikap: kapaktan plak çıkar, pikaba uçar, çalar ───────
+     Şarkı kartına tıkla → kapağın içinden plak kayar, ekranın
+     altındaki pikaba uçar, iğne plağa iner ve iTunes'un resmî
+     30 sn önizlemesi çalar. */
+  const tt = $('#turntable');
+  if (tt) {
+    const ttAudio  = new Audio();
+    ttAudio.preload = 'none';
+    const ttCover  = $('.tt-cover', tt);
+    const ttTitle  = $('.tt-title', tt);
+    const ttBar    = $('.tt-progress i', tt);
+    const ttToggle = $('.tt-toggle', tt);
+    const ttOpen   = $('.tt-open', tt);
+    const ttClose  = $('.tt-close', tt);
+    const ICON_PLAY  = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+    const ICON_PAUSE = '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+    let currentCard = null;
+
+    const setToggle = playing => { ttToggle.innerHTML = playing ? ICON_PAUSE : ICON_PLAY; };
+    setToggle(false);
+
+    const ttDoPause = () => {
+      ttAudio.pause();
+      tt.classList.remove('is-playing');   // iğne kalkar, plak durur
+      setToggle(false);
+    };
+    ttPause = ttDoPause;
+
+    const ttResume = () => {
+      stopMemberPart?.(null);              // üye sesi çalıyorsa sustur
+      ttAudio.play().then(() => {
+        tt.classList.add('is-playing');    // iğne plağa iner
+        setToggle(true);
+      }).catch(() => {});
+    };
+
+    const ttCloseAll = () => {
+      ttDoPause();
+      tt.classList.remove('is-open');
+      tt.setAttribute('aria-hidden', 'true');
+      currentCard?.classList.remove('is-spinning');
+      currentCard = null;
+    };
+
+    /* plağın karttan pikaba uçuşu */
+    const flyDisc = (card, done) => {
+      if (reduceMotion) { done(); return; }
+      const cover = $('.cover', card);
+      const r = cover.getBoundingClientRect();
+      const size = r.width * .82;
+      const startX = r.left + r.width * .09 + r.width * .82 / 2;
+      const startY = r.top + r.height / 2;
+      // pikap alttan ortalanmış; deck sol kenarda → hedefi hesapla
+      const dockW = Math.min(560, innerWidth - 28);
+      const endX = innerWidth / 2 - dockW / 2 + 18 + 43;
+      const endY = innerHeight - 20 - 57;
+      const disc = document.createElement('div');
+      disc.className = 'fly-disc';
+      disc.style.cssText = `left:0;top:0;width:${size}px;height:${size}px;`;
+      document.body.appendChild(disc);
+      disc.animate([
+        { transform: `translate(${startX - size/2}px, ${startY - size/2}px) rotate(0deg) scale(1)`, opacity: 1 },
+        { transform: `translate(${(startX+endX)/2 - size/2}px, ${Math.min(startY,endY) - size/2 - 90}px) rotate(360deg) scale(${(76/size+1)/2})`, opacity: 1, offset: .55 },
+        { transform: `translate(${endX - 38}px, ${endY - 38}px) rotate(720deg) scale(${76/size})`, opacity: 1 },
+      ], { duration: 850, easing: 'cubic-bezier(.3,.7,.3,1)' }).onfinish = () => {
+        disc.remove();
+        done();
+      };
+    };
+
+    $$('.release[data-audio]').forEach(card => {
+      card.addEventListener('click', e => {
+        e.preventDefault();
+        // aynı karta ikinci tık: duraklat / devam et
+        if (currentCard === card && tt.classList.contains('is-open')) {
+          tt.classList.contains('is-playing') ? ttDoPause() : ttResume();
+          return;
+        }
+        stopMemberPart?.(null);
+        ttDoPause();
+        currentCard?.classList.remove('is-spinning');
+        currentCard = card;
+        card.classList.add('is-spinning');
+        ttCover.src = $('.cover img', card).src;
+        ttTitle.textContent = card.dataset.title;
+        ttOpen.href = card.href;
+        ttBar.style.width = '0%';
+        tt.classList.add('is-open');
+        tt.setAttribute('aria-hidden', 'false');
+        flyDisc(card, () => {
+          ttAudio.src = card.dataset.audio;
+          ttAudio.currentTime = 0;
+          ttResume();
+        });
+      });
+    });
+
+    ttToggle.addEventListener('click', () => {
+      if (!ttAudio.src) return;
+      tt.classList.contains('is-playing') ? ttDoPause() : ttResume();
+    });
+    ttClose.addEventListener('click', ttCloseAll);
+    ttAudio.addEventListener('timeupdate', () => {
+      if (ttAudio.duration) ttBar.style.width = (ttAudio.currentTime / ttAudio.duration * 100) + '%';
+    });
+    ttAudio.addEventListener('ended', () => { ttDoPause(); ttBar.style.width = '100%'; });
+  }
 
   /* ── Modal aç/kapat ───────────────────────────────────────── */
   const modal = $('#memberModal');
