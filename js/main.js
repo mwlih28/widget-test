@@ -295,43 +295,49 @@
     {
       name: 'Esin Bahat', color: 'Sarı', mc: '#f2b705', tint: 'rgba(242,183,5,.32)',
       role: 'Ana Dansçı', img: 'assets/img/esin.webp',
+      quote: 'Sahne benim evim; her adım bir cümle.',
       bio: 'Uluslararası dans sporunda lisanslı bir yarışmacı olan Esin, yıllarını profesyonel dansçılık ve eğitmenlikle geçirdi. Doğuş Üniversitesi Psikoloji bölümünden mezun oldu. Big5 Türkiye sahnesinde kusursuz tekniği ve sahne hakimiyetiyle öne çıktı; bugün Manifest’in ana dansçısı olarak koreografilerin bel kemiği.',
-      facts: [['Doğum', '9 Ağustos 2000 · İstanbul'], ['Eğitim', 'Doğuş Ünv. · Psikoloji'], ['Geçmiş', 'Lisanslı dans sporcusu'], ['Görevi', 'Ana Dansçı']],
+      facts: [['Doğum', '9 Ağustos 2000'], ['Memleket', 'İstanbul'], ['Burç', 'Aslan'], ['Eğitim', 'Doğuş Ünv. · Psikoloji'], ['Geçmiş', 'Lisanslı dans sporcusu'], ['Görevi', 'Ana Dansçı']],
       ig: 'esin.bahat', tt: 'esinbahat',
     },
     {
       name: 'Hilal Yelekçi', color: 'Mor', mc: '#8b5cf6', tint: 'rgba(139,92,246,.3)',
       role: 'Baş Dansçı', img: 'assets/img/hilal.webp',
+      quote: 'Fırtına dediğin dışarıda kopar — ben sahnede koparırım.',
       bio: 'İTÜ Bilgisayar Mühendisliği mezunu Hilal, Manifest’ten önce “Pinkeu” sahne adıyla solo K-pop müziği yaptı ve K-pop dans eğitmenliğiyle tanındı. Türkiye’de K-pop kültürünün öncülerinden biri olarak gruba hem dans disiplinini hem de sahnede fırtına gibi esen enerjisini taşıyor.',
-      facts: [['Doğum', '20 Mayıs 2001 · İstanbul'], ['Eğitim', 'İTÜ · Bilgisayar Müh.'], ['Geçmiş', 'Solo K-pop: “Pinkeu”'], ['Görevi', 'Baş Dansçı']],
+      facts: [['Doğum', '20 Mayıs 2001'], ['Memleket', 'İstanbul'], ['Burç', 'Boğa'], ['Eğitim', 'İTÜ · Bilgisayar Müh.'], ['Geçmiş', 'Solo K-pop: “Pinkeu”'], ['Görevi', 'Baş Dansçı']],
       ig: 'hilalyelekci', tt: 'hilalyelekci',
     },
     {
       name: 'Lidya Pınar', color: 'Pembe', mc: '#ee6aa7', tint: 'rgba(238,106,167,.32)',
       role: 'Baş Vokalist', img: 'assets/img/lidya.webp',
+      quote: 'Zarafet, gücün en yüksek hali.',
       bio: 'Küçük yaşta piyano ve solfej eğitimi alan Lidya, tiyatro sahnesinden geçerek müziğe uzandı. Yeditepe Üniversitesi’nde Rus Dili ve Edebiyatı okuyor. Grubun baş vokalisti olmasının yanında kamera arkasında da üretiyor: Manifest kliplerinde yönetmenlik denemeleri de ona ait.',
-      facts: [['Doğum', '24 Haziran 2003 · İstanbul'], ['Eğitim', 'Yeditepe Ünv. · Rus Dili'], ['Geçmiş', 'Piyano · Tiyatro'], ['Görevi', 'Baş Vokalist']],
+      facts: [['Doğum', '24 Haziran 2003'], ['Memleket', 'İstanbul'], ['Burç', 'Yengeç'], ['Eğitim', 'Yeditepe Ünv. · Rus Dili'], ['Geçmiş', 'Piyano · Tiyatro · Yönetmenlik'], ['Görevi', 'Baş Vokalist']],
       ig: 'pynarlidia', tt: 'pynarlidia',
     },
     {
       name: 'Mina Solak', color: 'Kırmızı', mc: '#e63946', tint: 'rgba(230,57,70,.28)',
       role: 'Vokalist · Dansçı', img: 'assets/img/mina.webp',
+      quote: 'Ateşi ödünç almam; kendi ışığımla yanarım.',
       bio: 'İzmir doğumlu Mina, bale ile başladığı dans yolculuğunu modern dansla sürdürdü; Manifest’ten önce kliplerde ve konser sahnelerinde profesyonel dansçı olarak yer aldı. Bilgi Üniversitesi Sanat ve Kültür Yönetimi mezunu. Sahnedeki alev gibi varlığıyla grubun ateşini yüksek tutuyor.',
-      facts: [['Doğum', '16 Mayıs 2000 · İzmir'], ['Eğitim', 'Bilgi Ünv. · Sanat Yönetimi'], ['Geçmiş', 'Bale · Profesyonel dans'], ['Görevi', 'Vokalist · Dansçı']],
+      facts: [['Doğum', '16 Mayıs 2000'], ['Memleket', 'İzmir'], ['Burç', 'Boğa'], ['Eğitim', 'Bilgi Ünv. · Sanat Yönetimi'], ['Geçmiş', 'Bale · Profesyonel dans'], ['Görevi', 'Vokalist · Dansçı']],
       ig: 'minasolakk', tt: 'minasolakk',
     },
     {
       name: 'Sueda Uluca', color: 'Yeşil', mc: '#2fbf71', tint: 'rgba(47,191,113,.3)',
       role: 'Ana Vokalist', img: 'assets/img/sueda.webp',
+      quote: 'Enerji tükenmez — paylaştıkça çoğalır.',
       bio: 'Grubun en genci ve ana vokalisti. Bale ile başlayıp modern dans ve hip-hop’la devam etti; Magma Gençlik Korosu’nda şarkı söyledi. Özyeğin Üniversitesi İletişim Tasarımı mezunu. Sınır tanımayan sesi ve bulaşıcı neşesiyle Manifest sound’unun kalbinde duruyor.',
-      facts: [['Doğum', '23 Ağustos 2004 · İstanbul'], ['Eğitim', 'Özyeğin Ünv. · İletişim Tasarımı'], ['Geçmiş', 'Koro · Bale · Hip-hop'], ['Görevi', 'Ana Vokalist']],
+      facts: [['Doğum', '23 Ağustos 2004'], ['Memleket', 'İstanbul'], ['Burç', 'Başak'], ['Eğitim', 'Özyeğin Ünv. · İletişim Tasarımı'], ['Geçmiş', 'Koro · Bale · Hip-hop'], ['Görevi', 'Ana Vokalist']],
       ig: 'suedaauluca', tt: 'suedauluca',
     },
     {
       name: 'Zeynep Sude Oktay', color: 'Mavi', mc: '#3b82f6', tint: 'rgba(59,130,246,.3)',
       role: 'Vokalist · Dansçı', img: 'assets/img/zeynep.webp',
+      quote: 'En derin güç, sessiz olandır.',
       bio: '“Zoktay” sahne adıyla da bilinen Zeynep, Manifest öncesinde profesyonel dansçı olarak sahne aldı. Marmara Üniversitesi Halkla İlişkiler ve Tanıtım mezunu. Sakin özgüveni ve sarsılmaz enerjisiyle grubun dengesini kuran isim; sessiz ama derin bir güç.',
-      facts: [['Doğum', '18 Nisan 2001 · İstanbul'], ['Eğitim', 'Marmara Ünv. · Halkla İlişkiler'], ['Geçmiş', 'Profesyonel dansçı · “Zoktay”'], ['Görevi', 'Vokalist · Dansçı']],
+      facts: [['Doğum', '18 Nisan 2001'], ['Memleket', 'İstanbul'], ['Burç', 'Koç'], ['Eğitim', 'Marmara Ünv. · Halkla İlişkiler'], ['Geçmiş', 'Dansçı · Sahne adı “Zoktay”'], ['Görevi', 'Vokalist · Dansçı']],
       ig: 'zeynep.okktay', tt: 'zeynep.okktay',
     },
   ];
@@ -448,6 +454,10 @@
   const modal = $('#memberModal');
   if (modal) {
     const panel   = $('.mmodal-panel', modal);
+    const elBody  = $('.mmodal-body', modal);
+    const elQuote = $('.mmodal-quote', modal);
+    const navPrev = $('.mmodal-prev', modal);
+    const navNext = $('.mmodal-next', modal);
     const elPhoto = $('.mmodal-photo', modal);
     const elGhost = $('.mmodal-ghost', modal);
     const elName  = $('.mmodal-name', modal);
@@ -473,6 +483,7 @@
       elGhost.textContent = d.name.split(' ')[0];
       elName.textContent = d.name;
       elRole.textContent = d.role;
+      elQuote.textContent = '“' + d.quote + '”';
       elBio.textContent = d.bio;
       elColorI.style.background = d.mc;
       elColorB.textContent = d.color;
@@ -481,9 +492,18 @@
         `<a href="https://www.instagram.com/${d.ig}/" target="_blank" rel="noopener">${IG_SVG} @${d.ig}</a>` +
         `<a href="https://www.tiktok.com/@${d.tt}" target="_blank" rel="noopener">${TT_SVG} @${d.tt}</a>`;
       playBtn.classList.remove('is-on');
-      // fotoğraf giriş animasyonu her açılışta tekrar oynasın
-      elPhoto.style.animation = 'none';
-      requestAnimationFrame(() => { elPhoto.style.animation = ''; });
+      // önceki/sonraki üye etiketleri
+      const L = MEMBER_DATA.length;
+      $('small', navPrev).textContent = MEMBER_DATA[(idx - 1 + L) % L].name.split(' ')[0];
+      $('small', navNext).textContent = MEMBER_DATA[(idx + 1) % L].name.split(' ')[0];
+      // giriş animasyonları her açılışta/geçişte yeniden oynasın
+      const parts = [elPhoto, ...elBody.children];
+      parts.forEach((el, i) => {
+        el.style.setProperty('--st', i);
+        el.style.animation = 'none';
+      });
+      void elBody.offsetWidth;   // reflow → animasyon sıfırlanır
+      parts.forEach(el => { el.style.animation = ''; });
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('no-scroll');
@@ -505,6 +525,19 @@
       });
     });
     $$('[data-close]', modal).forEach(el => el.addEventListener('click', closeModal));
+    navPrev.addEventListener('click', () => {
+      stopMemberPart?.(null);
+      openModal((mIdx - 1 + MEMBER_DATA.length) % MEMBER_DATA.length);
+    });
+    navNext.addEventListener('click', () => {
+      stopMemberPart?.(null);
+      openModal((mIdx + 1) % MEMBER_DATA.length);
+    });
+    addEventListener('keydown', e => {
+      if (!modal.classList.contains('is-open')) return;
+      if (e.key === 'ArrowLeft') navPrev.click();
+      if (e.key === 'ArrowRight') navNext.click();
+    });
     addEventListener('keydown', e => {
       if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
     });
