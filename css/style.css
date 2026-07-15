@@ -848,6 +848,137 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
 .member-socials svg { width: 15px; height: 15px; fill: var(--muted); transition: fill .3s; }
 .member-socials a:hover svg { fill: #fff; }
 
+/* "Detay" butonu */
+.member-more {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 0 16px; border-radius: 100px;
+  height: 36px;
+  border: 1px solid var(--line-2); background: #fff;
+  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text); cursor: pointer;
+  transition: background .3s, border-color .3s, color .3s, transform .3s;
+}
+.member-more:hover { background: var(--mc); border-color: var(--mc); color: #fff; transform: translateY(-3px); }
+
+/* ── üye detay modali ───────────────────────────────────────── */
+.mmodal {
+  position: fixed; inset: 0; z-index: 500;
+  display: grid; place-items: center; padding: 24px;
+  visibility: hidden; pointer-events: none;
+}
+.mmodal.is-open { visibility: visible; pointer-events: auto; }
+.mmodal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(20, 18, 14, .45);
+  backdrop-filter: blur(14px);
+  opacity: 0; transition: opacity .4s;
+}
+.mmodal.is-open .mmodal-backdrop { opacity: 1; }
+.mmodal-panel {
+  position: relative; z-index: 1;
+  width: min(920px, 100%);
+  max-height: min(88svh, 720px);
+  display: grid; grid-template-columns: .9fr 1.1fr;
+  background: #fff; border-radius: 30px; overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 50px 140px rgba(17,17,17,.4);
+  opacity: 0; transform: translateY(46px) scale(.96);
+  transition: opacity .45s var(--ease), transform .45s var(--ease);
+}
+.mmodal.is-open .mmodal-panel { opacity: 1; transform: none; }
+.mmodal-close {
+  position: absolute; top: 16px; right: 16px; z-index: 3;
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid var(--line-2); background: rgba(255,255,255,.85);
+  backdrop-filter: blur(8px);
+  font-size: 15px; color: var(--text); cursor: pointer;
+  display: grid; place-items: center;
+  transition: background .3s, transform .3s, color .3s;
+}
+.mmodal-close:hover { background: #131313; color: #fff; transform: rotate(90deg); }
+
+.mmodal-visual {
+  position: relative; overflow: hidden;
+  display: flex; align-items: flex-end; justify-content: center;
+  background:
+    radial-gradient(ellipse 95% 70% at 50% 100%, var(--tint), transparent 76%),
+    linear-gradient(180deg, #fbfaf8, #f1efe9);
+  min-height: 320px;
+}
+.mmodal-ghost {
+  position: absolute; top: 8%; left: 50%; translate: -50% 0;
+  font-family: var(--display); font-weight: 900;
+  font-size: clamp(50px, 8vw, 92px); text-transform: uppercase;
+  color: var(--tint); letter-spacing: .04em; white-space: nowrap;
+}
+.mmodal-photo {
+  width: 88%; height: 94%; object-fit: contain; object-position: bottom;
+  filter: drop-shadow(0 26px 44px rgba(17,17,17,.32));
+  animation: mphoto-in .7s var(--ease) both .15s;
+}
+@keyframes mphoto-in {
+  from { transform: translateY(40px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+.mmodal-body { padding: clamp(28px, 4vw, 46px); overflow-y: auto; }
+.mmodal-color {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 100px;
+  background: var(--tint);
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--text); margin-bottom: 16px;
+}
+.mmodal-color i {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--mc); font-style: normal;
+}
+.mmodal-name {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(26px, 3.4vw, 38px); line-height: 1.05;
+  text-transform: uppercase;
+}
+.mmodal-role {
+  margin: 6px 0 16px;
+  color: var(--mc); font-size: 12px; font-weight: 800;
+  letter-spacing: .2em; text-transform: uppercase;
+}
+.mmodal-bio { color: var(--muted); font-size: 15px; line-height: 1.7; }
+.mmodal-facts {
+  margin: 22px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px;
+}
+.mmodal-facts > div {
+  padding: 12px 16px; border-radius: var(--r-sm);
+  background: var(--bg-2); border: 1px solid var(--line);
+}
+.mmodal-facts dt {
+  font-size: 10.5px; font-weight: 800; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted-2);
+}
+.mmodal-facts dd { font-size: 14px; font-weight: 600; margin-top: 2px; }
+.mmodal-actions { margin: 4px 0 18px; }
+.mmodal-play { background: var(--mc); color: #fff; box-shadow: 0 12px 32px var(--tint); }
+.mmodal-play::before { display: none; }
+.mmodal-play.is-on { animation: new-pulse 1.2s ease-in-out infinite; }
+.mmodal-socials { display: flex; gap: 10px; flex-wrap: wrap; }
+.mmodal-socials a {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px; border-radius: 100px;
+  border: 1px solid var(--line-2); text-decoration: none;
+  font-size: 13.5px; font-weight: 600;
+  transition: background .3s, border-color .3s, color .3s, transform .3s;
+}
+.mmodal-socials a:hover { background: var(--mc); border-color: var(--mc); color: #fff; transform: translateY(-2px); }
+.mmodal-socials svg { width: 15px; height: 15px; fill: currentColor; }
+
+@media (max-width: 760px) {
+  .mmodal { padding: 14px; }
+  .mmodal-panel { grid-template-columns: 1fr; max-height: 92svh; overflow-y: auto; }
+  .mmodal-visual { min-height: 260px; max-height: 300px; }
+  .mmodal-body { overflow: visible; }
+  .mmodal-facts { grid-template-columns: 1fr; }
+}
+
 /* ── video ──────────────────────────────────────────────────── */
 .video-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
 .video-card {
