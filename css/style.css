@@ -1027,6 +1027,12 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
 .member-socials svg { width: 15px; height: 15px; fill: var(--muted); transition: fill .3s; }
 .member-socials a:hover svg { fill: #fff; }
 
+.members-note {
+  margin-top: clamp(28px, 4vw, 44px);
+  font-size: 12.5px; line-height: 1.6; color: var(--muted-2);
+  max-width: 640px;
+}
+
 /* "Detay" butonu */
 .member-more {
   display: inline-flex; align-items: center; gap: 6px;

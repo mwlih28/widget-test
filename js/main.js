@@ -181,26 +181,26 @@
     });
   }
 
-  /* ── Üye kartları: 3D tilt + renk parlaması + Toz Pembe ──
-     Hover'da kart 3D eğilir, üyenin rengi kartı sarar ve
-     "Toz Pembe"nin resmî 30 sn önizlemesinden o üyeye ayrılan
-     bölüm çalar (iTunes preview). */
-  const members = $$('.member');
+  /* ── Üye kartları: 3D tilt + renk parlaması + Toz Pembe ──────
+     Hover'da kart her zaman 3 boyutlu eğilir ve üyenin rengi yanar.
+     Ses ise SADECE gerçekten doğrulanmış bir bilgiye dayanıyor:
+     30 sn'lik resmî önizleme incelendiğinde içinde hiç sessizlik/
+     kesinti yok (bkz. ffmpeg silencedetect) — yani tek parça, kesintisiz
+     bir bölüm. İki bağımsız haber kaynağı (yenisokegazetesi.com,
+     tekirdagbakis.com) şarkının nakarat kısmının Hilal, Lidya, Mina ve
+     Sueda tarafından söylendiğini, bu kısmın da sosyal medyada en çok
+     paylaşılan/viral bölüm olduğunu yazıyor — önizlemenin bu nakarat
+     olması kuvvetle muhtemel. Bu yüzden ses SADECE bu dört üyenin
+     kartında çalıyor; Esin ve Zeynep nakaratta yer almadığı için
+     onların kartında ses çalmıyoruz (kendi gerçek bölümlerini
+     modalde/rozette gösteriyoruz). Saniye saniye kişiye özel bölüm
+     ayrımı hiçbir yerde resmî olarak paylaşılmadığı için UYDURULMADI. */
+    const members = $$('.member');
   let playMemberPart = null, stopMemberPart = null;   // modal da kullanır
   let ttPause = null;                                  // pikap ile ses çakışmasın
   if (members.length) {
-    /* Toz Pembe (resmî 30 sn önizleme) içinde her üyenin bölümü.
-       Kart sırası: Esin, Hilal, Lidya, Mina, Sueda, Zeynep.
-       Kimin hangi saniyede söylediğini biliyorsan start/dur değerlerini
-       buradan güncelle — başka hiçbir yere dokunman gerekmez. */
-    const PARTS = [
-      { name: 'Esin',   start:  0.0, dur: 5.0 },
-      { name: 'Hilal',  start:  5.0, dur: 5.0 },
-      { name: 'Lidya',  start: 10.0, dur: 5.0 },
-      { name: 'Mina',   start: 15.0, dur: 5.0 },
-      { name: 'Sueda',  start: 20.0, dur: 5.0 },
-      { name: 'Zeynep', start: 25.0, dur: 4.8 },
-    ];
+    // idx: 0 Esin, 1 Hilal, 2 Lidya, 3 Mina, 4 Sueda, 5 Zeynep
+    const CHORUS_IDX = new Set([1, 2, 3, 4]);   // Hilal, Lidya, Mina, Sueda
     const audio = new Audio('assets/audio/toz-pembe-preview.mp3');
     audio.preload = 'auto';
     let fadeTimer = null, stopTimer = null, active = null;
@@ -228,18 +228,19 @@
     };
 
     const playSegment = (card, idx) => {
-      ttPause?.();                     // pikap çalıyorsa duraklat
+      if (!CHORUS_IDX.has(idx)) return;   // bu üye nakaratta yok → sahte çalma yapma
+      ttPause?.();                        // pikap çalıyorsa duraklat
       clearTimeout(stopTimer);
       members.forEach(m => m.classList.remove('is-playing'));
-      const part = PARTS[idx] || PARTS[0];
-      audio.currentTime = part.start;
+      audio.currentTime = 0;              // önizlemenin tamamı = nakarat, kişiye özel dilim yok
       audio.volume = 0;
       const p = audio.play();
       if (p) p.then(() => {
         card.classList.add('is-playing');
         active = card;
         fadeTo(.85, 250);
-        stopTimer = setTimeout(() => stopSegment(card), part.dur * 1000);
+        const dur = (isFinite(audio.duration) && audio.duration > 0) ? audio.duration : 28;
+        stopTimer = setTimeout(() => stopSegment(card), dur * 1000);
       }).catch(() => {}); // autoplay kilitliyse sessizce geç
     };
 
@@ -290,12 +291,22 @@
 
   /* ── Üye detay modali ─────────────────────────────────────
      Biyografiler ve bireysel hesaplar resmî kaynaklardan
-     (manifestgirlband.com + Wikipedia) alınmıştır. */
+     (manifestgirlband.com + Wikipedia) alınmıştır.
+
+     `tp` alanı: "Toz Pembe"de üyenin yer aldığı gerçek bölüm(ler).
+     Kaynak: yenisokegazetesi.com ve tekirdagbakis.com'un hayran/haber
+     analizine dayanan bölüm dağılımı (resmî olarak paylaşılmamıştır,
+     bu yüzden site içinde de "hayran analizi" olarak belirtiliyor).
+     `chorus: true` olan 4 üye nakaratta söylüyor — 30 sn'lik önizleme
+     büyük olasılıkla bu nakarat (viral/en çok paylaşılan kısım budur
+     ve önizlemede hiç kesinti yok, tek bölüm). `chorus: false` olan
+     Esin ve Zeynep nakaratta yok; onların kartında bu yüzden ses
+     çalmıyoruz — kendi gerçek bölümlerini gösteriyoruz. */
   const MEMBER_DATA = [
     {
       name: 'Esin Bahat', color: 'Sarı', mc: '#f2b705', tint: 'rgba(242,183,5,.32)',
       role: 'Ana Dansçı', img: 'assets/img/esin.webp',
-      quote: 'Sahne benim evim; her adım bir cümle.',
+      tp: ['2. Bölüm', 'Çıkış'], chorus: false,
       bio: 'Uluslararası dans sporunda lisanslı bir yarışmacı olan Esin, yıllarını profesyonel dansçılık ve eğitmenlikle geçirdi. Doğuş Üniversitesi Psikoloji bölümünden mezun oldu. Big5 Türkiye sahnesinde kusursuz tekniği ve sahne hakimiyetiyle öne çıktı; bugün Manifest’in ana dansçısı olarak koreografilerin bel kemiği.',
       facts: [['Doğum', '9 Ağustos 2000'], ['Memleket', 'İstanbul'], ['Burç', 'Aslan'], ['Eğitim', 'Doğuş Ünv. · Psikoloji'], ['Geçmiş', 'Lisanslı dans sporcusu'], ['Görevi', 'Ana Dansçı']],
       ig: 'esin.bahat', tt: 'esinbahat',
@@ -303,7 +314,7 @@
     {
       name: 'Hilal Yelekçi', color: 'Mor', mc: '#8b5cf6', tint: 'rgba(139,92,246,.3)',
       role: 'Baş Dansçı', img: 'assets/img/hilal.webp',
-      quote: 'Fırtına dediğin dışarıda kopar — ben sahnede koparırım.',
+      tp: ['2. Bölüm', 'Nakarat'], chorus: true,
       bio: 'İTÜ Bilgisayar Mühendisliği mezunu Hilal, Manifest’ten önce “Pinkeu” sahne adıyla solo K-pop müziği yaptı ve K-pop dans eğitmenliğiyle tanındı. Türkiye’de K-pop kültürünün öncülerinden biri olarak gruba hem dans disiplinini hem de sahnede fırtına gibi esen enerjisini taşıyor.',
       facts: [['Doğum', '20 Mayıs 2001'], ['Memleket', 'İstanbul'], ['Burç', 'Boğa'], ['Eğitim', 'İTÜ · Bilgisayar Müh.'], ['Geçmiş', 'Solo K-pop: “Pinkeu”'], ['Görevi', 'Baş Dansçı']],
       ig: 'hilalyelekci', tt: 'hilalyelekci',
@@ -311,7 +322,7 @@
     {
       name: 'Lidya Pınar', color: 'Pembe', mc: '#ee6aa7', tint: 'rgba(238,106,167,.32)',
       role: 'Baş Vokalist', img: 'assets/img/lidya.webp',
-      quote: 'Zarafet, gücün en yüksek hali.',
+      tp: ['Nakarat', 'Köprü'], chorus: true,
       bio: 'Küçük yaşta piyano ve solfej eğitimi alan Lidya, tiyatro sahnesinden geçerek müziğe uzandı. Yeditepe Üniversitesi’nde Rus Dili ve Edebiyatı okuyor. Grubun baş vokalisti olmasının yanında kamera arkasında da üretiyor: Manifest kliplerinde yönetmenlik denemeleri de ona ait.',
       facts: [['Doğum', '24 Haziran 2003'], ['Memleket', 'İstanbul'], ['Burç', 'Yengeç'], ['Eğitim', 'Yeditepe Ünv. · Rus Dili'], ['Geçmiş', 'Piyano · Tiyatro · Yönetmenlik'], ['Görevi', 'Baş Vokalist']],
       ig: 'pynarlidia', tt: 'pynarlidia',
@@ -319,7 +330,7 @@
     {
       name: 'Mina Solak', color: 'Kırmızı', mc: '#e63946', tint: 'rgba(230,57,70,.28)',
       role: 'Vokalist · Dansçı', img: 'assets/img/mina.webp',
-      quote: 'Ateşi ödünç almam; kendi ışığımla yanarım.',
+      tp: ['1. Bölüm', 'Nakarat', 'Çıkış'], chorus: true,
       bio: 'İzmir doğumlu Mina, bale ile başladığı dans yolculuğunu modern dansla sürdürdü; Manifest’ten önce kliplerde ve konser sahnelerinde profesyonel dansçı olarak yer aldı. Bilgi Üniversitesi Sanat ve Kültür Yönetimi mezunu. Sahnedeki alev gibi varlığıyla grubun ateşini yüksek tutuyor.',
       facts: [['Doğum', '16 Mayıs 2000'], ['Memleket', 'İzmir'], ['Burç', 'Boğa'], ['Eğitim', 'Bilgi Ünv. · Sanat Yönetimi'], ['Geçmiş', 'Bale · Profesyonel dans'], ['Görevi', 'Vokalist · Dansçı']],
       ig: 'minasolakk', tt: 'minasolakk',
@@ -327,7 +338,7 @@
     {
       name: 'Sueda Uluca', color: 'Yeşil', mc: '#2fbf71', tint: 'rgba(47,191,113,.3)',
       role: 'Ana Vokalist', img: 'assets/img/sueda.webp',
-      quote: 'Enerji tükenmez — paylaştıkça çoğalır.',
+      tp: ['Giriş', '1. Bölüm', 'Nakarat', 'Köprü'], chorus: true,
       bio: 'Grubun en genci ve ana vokalisti. Bale ile başlayıp modern dans ve hip-hop’la devam etti; Magma Gençlik Korosu’nda şarkı söyledi. Özyeğin Üniversitesi İletişim Tasarımı mezunu. Sınır tanımayan sesi ve bulaşıcı neşesiyle Manifest sound’unun kalbinde duruyor.',
       facts: [['Doğum', '23 Ağustos 2004'], ['Memleket', 'İstanbul'], ['Burç', 'Başak'], ['Eğitim', 'Özyeğin Ünv. · İletişim Tasarımı'], ['Geçmiş', 'Koro · Bale · Hip-hop'], ['Görevi', 'Ana Vokalist']],
       ig: 'suedaauluca', tt: 'suedauluca',
@@ -335,7 +346,7 @@
     {
       name: 'Zeynep Sude Oktay', color: 'Mavi', mc: '#3b82f6', tint: 'rgba(59,130,246,.3)',
       role: 'Vokalist · Dansçı', img: 'assets/img/zeynep.webp',
-      quote: 'En derin güç, sessiz olandır.',
+      tp: ['1. Bölüm', '2. Bölüm', '3. Bölüm (solo)'], chorus: false,
       bio: '“Zoktay” sahne adıyla da bilinen Zeynep, Manifest öncesinde profesyonel dansçı olarak sahne aldı. Marmara Üniversitesi Halkla İlişkiler ve Tanıtım mezunu. Sakin özgüveni ve sarsılmaz enerjisiyle grubun dengesini kuran isim; sessiz ama derin bir güç.',
       facts: [['Doğum', '18 Nisan 2001'], ['Memleket', 'İstanbul'], ['Burç', 'Koç'], ['Eğitim', 'Marmara Ünv. · Halkla İlişkiler'], ['Geçmiş', 'Dansçı · Sahne adı “Zoktay”'], ['Görevi', 'Vokalist · Dansçı']],
       ig: 'zeynep.okktay', tt: 'zeynep.okktay',
@@ -506,7 +517,7 @@
       elGhost.textContent = d.name.split(' ')[0];
       elName.textContent = d.name;
       elRole.textContent = d.role;
-      elQuote.textContent = '“' + d.quote + '”';
+      elQuote.textContent = '🎵 Toz Pembe’de: ' + d.tp.join(' · ');
       elBio.textContent = d.bio;
       elColorI.style.background = d.mc;
       elColorB.textContent = d.color;
@@ -515,6 +526,14 @@
         `<a href="https://www.instagram.com/${d.ig}/" target="_blank" rel="noopener">${IG_SVG} @${d.ig}</a>` +
         `<a href="https://www.tiktok.com/@${d.tt}" target="_blank" rel="noopener">${TT_SVG} @${d.tt}</a>`;
       playBtn.classList.remove('is-on');
+      // nakaratta sesi olan üyede yerel klip çalınır; olmayanda gerçek
+      // platform linkine yönlendirilir (bkz. dosya başındaki not)
+      const playIcon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+      if (d.chorus) {
+        playBtn.innerHTML = playIcon + 'Nakaratı Dinle (Toz Pembe)';
+      } else {
+        playBtn.innerHTML = playIcon + 'Toz Pembe’yi Dinle ↗';
+      }
       // önceki/sonraki üye etiketleri
       const L = MEMBER_DATA.length;
       $('small', navPrev).textContent = MEMBER_DATA[(idx - 1 + L) % L].name.split(' ')[0];
@@ -565,7 +584,13 @@
       if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
     });
 
+    const TOZ_PEMBE_URL = 'https://music.apple.com/tr/album/toz-pembe/6784751861?i=6784751987';
     playBtn.addEventListener('click', () => {
+      const d = MEMBER_DATA[mIdx];
+      if (!d.chorus) {                 // nakaratta yok → yerel klip çalmak yanıltıcı olur
+        window.open(TOZ_PEMBE_URL, '_blank', 'noopener');
+        return;
+      }
       clearTimeout(playPulse);
       if (playBtn.classList.contains('is-on')) {
         playBtn.classList.remove('is-on');
@@ -574,7 +599,7 @@
       }
       playBtn.classList.add('is-on');
       playMemberPart?.(members[mIdx], mIdx);
-      playPulse = setTimeout(() => playBtn.classList.remove('is-on'), 5200);
+      playPulse = setTimeout(() => playBtn.classList.remove('is-on'), 29000);
     });
   }
 
