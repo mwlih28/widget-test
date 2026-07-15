@@ -698,7 +698,7 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
 .release:nth-child(6n+4):hover { border-color: var(--c-mina); }
 .release:nth-child(6n+5):hover { border-color: var(--c-sueda); }
 .release:nth-child(6n+6):hover { border-color: var(--c-zeynep); }
-.release .cover { position: relative; aspect-ratio: 1; overflow: hidden; }
+.release .cover { display: block; position: relative; aspect-ratio: 1; overflow: hidden; }
 .release .cover img {
   width: 100%; height: 100%; object-fit: cover;
   transition: transform .55s var(--ease);
@@ -719,7 +719,7 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
 }
 .release:hover .play { opacity: 1; transform: none; }
 .release .play svg { width: 15px; height: 15px; fill: #fff; margin-left: 2px; }
-.release-body { padding: 14px 16px 16px; }
+.release-body { display: block; padding: 14px 16px 16px; }
 .release-body b {
   display: block; font-size: 14.5px; font-weight: 700;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -733,7 +733,7 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
 .release .cover { isolation: isolate; }
 .release .cover img { position: relative; z-index: 1; }
 .disc-peek {
-  position: absolute; top: 50%; right: 4%; z-index: 0;
+  position: absolute; top: 50%; left: 9%; z-index: 0;
   width: 82%; aspect-ratio: 1; translate: 0 -50%;
   border-radius: 50%;
   background:
@@ -741,15 +741,39 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
     radial-gradient(circle, transparent 6%, #111 6.5%),
     repeating-radial-gradient(circle, #101010 0 2.5px, #1e1e1e 2.5px 4.5px);
   box-shadow: 0 8px 26px rgba(0,0,0,.4);
-  transition: transform .5s var(--ease);
+  transition: transform .5s var(--ease), opacity .25s;
   transform: translateX(0) rotate(0deg);
 }
-.release[data-audio]:hover .disc-peek { transform: translateX(26%) rotate(50deg); }
-.release[data-audio] .cover img { transition: transform .55s var(--ease), translate .5s var(--ease); }
+.release[data-audio]:hover .disc-peek { transform: translateX(30%) rotate(50deg); }
+.release[data-audio] .cover img { transition: transform .55s var(--ease), translate .5s var(--ease), opacity .2s; }
 .release[data-audio]:hover .cover img { translate: -6% 0; }
 /* çalmakta olan kartın işareti */
 .release.is-spinning { border-color: #131313; }
-.release.is-spinning .disc-peek { transform: translateX(26%) rotate(50deg); opacity: .35; }
+.release.is-spinning .disc-peek { transform: translateX(30%) rotate(50deg); opacity: .35; }
+
+/* ── kapak ikiye ayrılıp plağı bırakır ──
+   Tıklanınca JS kapağın iki yarısını (.sleeve-half) oluşturur:
+   yarımlar yana açılır, ortadan plak yükselir, sonra pikaba uçar. */
+.sleeve-half {
+  position: absolute; inset: 0; z-index: 3;
+  background-size: cover; background-position: center;
+  transition: transform .55s var(--ease);
+  will-change: transform;
+  pointer-events: none;
+}
+.sleeve-half.left  { clip-path: inset(0 50% 0 0); }
+.sleeve-half.right { clip-path: inset(0 0 0 50%); }
+.release.is-opening .sleeve-half.left  { transform: translateX(-30%) rotate(-4deg); }
+.release.is-opening .sleeve-half.right { transform: translateX(30%) rotate(4deg); }
+.release.is-opening .cover img { opacity: 0 !important; }
+.release.is-opening .new-tag,
+.release.is-opening .play { opacity: 0; }
+.release.is-opening .disc-peek {
+  transform: translateY(-14%) rotate(160deg) scale(1.04) !important;
+  opacity: 1 !important;
+  transition: transform .55s var(--ease) .1s;
+}
+.release.is-flying .disc-peek { opacity: 0 !important; transition: opacity .15s; }
 
 /* uçan plak (JS klonu) */
 .fly-disc {

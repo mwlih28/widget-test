@@ -386,14 +386,12 @@
       currentCard = null;
     };
 
-    /* plağın karttan pikaba uçuşu */
+    /* plağın (o anki konumundan) pikaba uçuşu */
     const flyDisc = (card, done) => {
-      if (reduceMotion) { done(); return; }
-      const cover = $('.cover', card);
-      const r = cover.getBoundingClientRect();
-      const size = r.width * .82;
-      const startX = r.left + r.width * .09 + r.width * .82 / 2;
-      const startY = r.top + r.height / 2;
+      const r = $('.disc-peek', card).getBoundingClientRect();
+      const size = r.width;
+      const startX = r.left + size / 2;
+      const startY = r.top + size / 2;
       // pikap alttan ortalanmış; deck sol kenarda → hedefi hesapla
       const dockW = Math.min(560, innerWidth - 28);
       const endX = innerWidth / 2 - dockW / 2 + 18 + 43;
@@ -403,18 +401,43 @@
       disc.style.cssText = `left:0;top:0;width:${size}px;height:${size}px;`;
       document.body.appendChild(disc);
       disc.animate([
-        { transform: `translate(${startX - size/2}px, ${startY - size/2}px) rotate(0deg) scale(1)`, opacity: 1 },
-        { transform: `translate(${(startX+endX)/2 - size/2}px, ${Math.min(startY,endY) - size/2 - 90}px) rotate(360deg) scale(${(76/size+1)/2})`, opacity: 1, offset: .55 },
-        { transform: `translate(${endX - 38}px, ${endY - 38}px) rotate(720deg) scale(${76/size})`, opacity: 1 },
+        { transform: `translate(${startX - size/2}px, ${startY - size/2}px) rotate(160deg) scale(1)`, opacity: 1 },
+        { transform: `translate(${(startX+endX)/2 - size/2}px, ${Math.min(startY,endY) - size/2 - 90}px) rotate(430deg) scale(${(76/size+1)/2})`, opacity: 1, offset: .55 },
+        { transform: `translate(${endX - 38}px, ${endY - 38}px) rotate(880deg) scale(${76/size})`, opacity: 1 },
       ], { duration: 850, easing: 'cubic-bezier(.3,.7,.3,1)' }).onfinish = () => {
         disc.remove();
         done();
       };
     };
 
+    /* kapağı ikiye ayır, plak aradan çıksın, sonra uçsun */
+    const ejectDisc = (card, done) => {
+      if (reduceMotion) { done(); return; }
+      // yarımları ilk kullanımda oluştur
+      if (!card.dataset.split) {
+        const cover = $('.cover', card);
+        const src = $('img', cover).src;
+        for (const side of ['left', 'right']) {
+          const h = document.createElement('span');
+          h.className = 'sleeve-half ' + side;
+          h.style.backgroundImage = `url("${src}")`;
+          h.setAttribute('aria-hidden', 'true');
+          cover.appendChild(h);
+        }
+        card.dataset.split = '1';
+      }
+      requestAnimationFrame(() => card.classList.add('is-opening'));
+      setTimeout(() => {                       // yarımlar açıldı, plak yükseldi
+        card.classList.add('is-flying');       // karttaki plağı gizle
+        flyDisc(card, done);                   // klon pikaba uçar
+        setTimeout(() => card.classList.remove('is-opening', 'is-flying'), 620);
+      }, 480);
+    };
+
     $$('.release[data-audio]').forEach(card => {
       card.addEventListener('click', e => {
         e.preventDefault();
+        if (card.classList.contains('is-opening')) return;   // animasyon sürüyor
         // aynı karta ikinci tık: duraklat / devam et
         if (currentCard === card && tt.classList.contains('is-open')) {
           tt.classList.contains('is-playing') ? ttDoPause() : ttResume();
@@ -424,14 +447,14 @@
         ttDoPause();
         currentCard?.classList.remove('is-spinning');
         currentCard = card;
-        card.classList.add('is-spinning');
         ttCover.src = $('.cover img', card).src;
         ttTitle.textContent = card.dataset.title;
         ttOpen.href = card.href;
         ttBar.style.width = '0%';
         tt.classList.add('is-open');
         tt.setAttribute('aria-hidden', 'false');
-        flyDisc(card, () => {
+        ejectDisc(card, () => {
+          card.classList.add('is-spinning');
           ttAudio.src = card.dataset.audio;
           ttAudio.currentTime = 0;
           ttResume();
