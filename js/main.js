@@ -213,15 +213,22 @@
     audio.preload = 'auto';
     let fadeTimer = null, stopTimer = null, active = null;
 
-    // Tarayıcı autoplay kilidini ilk dokunuş/tıkta aç
-    const unlock = () => {
+    // İlk kullanıcı etkileşiminde sesi autoplay kilidinden çıkar.
+    // pause() ÇAĞIRMIYORUZ: hemen ardından gelen playSegment'in play()'ini
+    // kesip "AbortError: interrupted by pause()" hatasına yol açıyordu.
+    // Onun yerine sessiz (muted) bir çalma başlatıp bırakıyoruz; playSegment
+    // devralınca sesi açar, kimse devralmazsa klip kendiliğinden biter.
+    let primed = false;
+    const prime = () => {
+      if (primed) return;
+      primed = true;
       audio.muted = true;
-      audio.play().then(() => { audio.pause(); audio.muted = false; }).catch(() => { audio.muted = false; });
-      removeEventListener('pointerdown', unlock);
-      removeEventListener('keydown', unlock);
+      audio.play().catch(() => {});
+      removeEventListener('pointerdown', prime);
+      removeEventListener('keydown', prime);
     };
-    addEventListener('pointerdown', unlock, { once: false });
-    addEventListener('keydown', unlock, { once: false });
+    addEventListener('pointerdown', prime);
+    addEventListener('keydown', prime);
 
     const fadeTo = (target, ms, then) => {
       clearInterval(fadeTimer);
@@ -236,19 +243,23 @@
     };
 
     const playSegment = (card, idx) => {
-      const range = PLAYABLE[idx];
-      if (!range) return;                 // bu üyenin gerçek anı elimizdeki 30 sn'de yok
       ttPause?.();                        // pikap çalıyorsa duraklat
       clearTimeout(stopTimer);
       members.forEach(m => m.classList.remove('is-playing'));
-      audio.currentTime = range.from;
+      // Esin/Sueda: gerçek anları önizleme penceresinde → o offset'ten çal.
+      // Diğerleri: gerçek anları elimizdeki 30 sn'nin dışında → önizlemeyi
+      // baştan çalıyoruz (kart sessiz kalmasın); gerçek zamanları rozette.
+      const range = PLAYABLE[idx];
+      audio.muted = false;              // prime muted başlatmış olabilir → aç
+      audio.currentTime = range ? range.from : 0;
       audio.volume = 0;
       const p = audio.play();
       if (p) p.then(() => {
         card.classList.add('is-playing');
         active = card;
         fadeTo(.85, 250);
-        const dur = Math.max(.3, range.to - range.from);
+        const full = (isFinite(audio.duration) && audio.duration > 0) ? audio.duration : 28;
+        const dur = range ? Math.max(.3, range.to - range.from) : full;
         stopTimer = setTimeout(() => stopSegment(card), dur * 1000);
       }).catch(() => {}); // autoplay kilitliyse sessizce geç
     };
@@ -511,6 +522,8 @@
     const elColorB = $('.mmodal-color b', modal);
     const elSoc   = $('.mmodal-socials', modal);
     const playBtn = $('.mmodal-play', modal);
+    const elFull  = $('.mmodal-full', modal);
+    const TOZ_PEMBE_URL = 'https://music.apple.com/tr/album/toz-pembe/6784751861?i=6784751987';
     let mIdx = 0, playPulse = null;
 
     const IG_SVG = '<svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2a6.6 6.6 0 1 0 0 13.2 6.6 6.6 0 0 0 0-13.2zm0 10.9a4.3 4.3 0 1 1 0-8.6 4.3 4.3 0 0 1 0 8.6zm8.4-11.1a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg>';
@@ -535,15 +548,13 @@
         `<a href="https://www.instagram.com/${d.ig}/" target="_blank" rel="noopener">${IG_SVG} @${d.ig}</a>` +
         `<a href="https://www.tiktok.com/@${d.tt}" target="_blank" rel="noopener">${TT_SVG} @${d.tt}</a>`;
       playBtn.classList.remove('is-on');
-      // gerçek anı elimizdeki 30 sn'lik önizlemenin içinde kalan üyede
-      // o saniyeler çalınır; kalmayanda gerçek platform linkine
-      // yönlendirilir (bkz. dosya başındaki not)
+      // her üye için ses çalar. Esin/Sueda kendi gerçek anını, diğerleri
+      // şarkının resmî önizlemesini duyar; gerçek an rozette/altta yazılı.
       const playIcon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
-      if (d.playable) {
-        playBtn.innerHTML = playIcon + 'Kendi Anını Dinle (' + d.tp[0] + ')';
-      } else {
-        playBtn.innerHTML = playIcon + 'Toz Pembe’yi Dinle ↗';
-      }
+      playBtn.innerHTML = playIcon + (d.playable
+        ? 'Kendi Anını Dinle (' + d.tp[0] + ')'
+        : 'Önizlemeyi Dinle');
+      if (elFull) elFull.href = TOZ_PEMBE_URL;
       // önceki/sonraki üye etiketleri
       const L = MEMBER_DATA.length;
       $('small', navPrev).textContent = MEMBER_DATA[(idx - 1 + L) % L].name.split(' ')[0];
@@ -594,13 +605,8 @@
       if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
     });
 
-    const TOZ_PEMBE_URL = 'https://music.apple.com/tr/album/toz-pembe/6784751861?i=6784751987';
     playBtn.addEventListener('click', () => {
       const d = MEMBER_DATA[mIdx];
-      if (!d.playable) {                // gerçek anı elimizdeki 30 sn'de yok
-        window.open(TOZ_PEMBE_URL, '_blank', 'noopener');
-        return;
-      }
       clearTimeout(playPulse);
       if (playBtn.classList.contains('is-on')) {
         playBtn.classList.remove('is-on');
@@ -609,12 +615,16 @@
       }
       playBtn.classList.add('is-on');
       playMemberPart?.(members[mIdx], mIdx);
-      // buton nabzını gerçek bölüm süresi kadar tut ("1:05–1:18" → 13 sn)
-      const [a, b] = d.tp[0].split('–').map(t => {
-        const [m, s] = t.split(':').map(Number);
-        return m * 60 + s;
-      });
-      playPulse = setTimeout(() => playBtn.classList.remove('is-on'), (b - a + .3) * 1000);
+      // buton nabzı: playable ise kendi anı kadar, değilse tam önizleme kadar
+      let ms = 28000;
+      if (d.playable) {
+        const [a, b] = d.tp[0].split('–').map(t => {
+          const [m, s] = t.split(':').map(Number);
+          return m * 60 + s;
+        });
+        ms = (b - a + .3) * 1000;
+      }
+      playPulse = setTimeout(() => playBtn.classList.remove('is-on'), ms);
     });
   }
 
