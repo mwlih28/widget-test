@@ -181,6 +181,115 @@
     });
   }
 
+  /* ── Üye kartları: 3D tilt + renk parlaması + Toz Pembe ──
+     Hover'da kart 3D eğilir, üyenin rengi kartı sarar ve
+     "Toz Pembe"nin resmî 30 sn önizlemesinden o üyeye ayrılan
+     bölüm çalar (iTunes preview). */
+  const members = $$('.member');
+  if (members.length) {
+    const SEG = 4.6;                       // üye başına saniye
+    const audio = new Audio('assets/audio/toz-pembe-preview.mp3');
+    audio.preload = 'auto';
+    let fadeTimer = null, stopTimer = null, active = null;
+
+    // Tarayıcı autoplay kilidini ilk dokunuş/tıkta aç
+    const unlock = () => {
+      audio.muted = true;
+      audio.play().then(() => { audio.pause(); audio.muted = false; }).catch(() => { audio.muted = false; });
+      removeEventListener('pointerdown', unlock);
+      removeEventListener('keydown', unlock);
+    };
+    addEventListener('pointerdown', unlock, { once: false });
+    addEventListener('keydown', unlock, { once: false });
+
+    const fadeTo = (target, ms, then) => {
+      clearInterval(fadeTimer);
+      const step = 30, delta = (target - audio.volume) / (ms / step);
+      fadeTimer = setInterval(() => {
+        const v = audio.volume + delta;
+        if ((delta > 0 && v >= target) || (delta < 0 && v <= target)) {
+          audio.volume = target; clearInterval(fadeTimer);
+          if (then) then();
+        } else audio.volume = Math.min(1, Math.max(0, v));
+      }, step);
+    };
+
+    const playSegment = (card, idx) => {
+      clearTimeout(stopTimer);
+      members.forEach(m => m.classList.remove('is-playing'));
+      audio.currentTime = idx * SEG;
+      audio.volume = 0;
+      const p = audio.play();
+      if (p) p.then(() => {
+        card.classList.add('is-playing');
+        active = card;
+        fadeTo(.85, 250);
+        stopTimer = setTimeout(() => stopSegment(card), SEG * 1000);
+      }).catch(() => {}); // autoplay kilitliyse sessizce geç
+    };
+
+    const stopSegment = card => {
+      clearTimeout(stopTimer);
+      fadeTo(0, 350, () => audio.pause());
+      (card || active)?.classList.remove('is-playing');
+      if (card === active || !card) active = null;
+    };
+
+    members.forEach((card, idx) => {
+      const maxTilt = 9;
+      let raf = null;
+
+      if (finePointer) {
+        card.addEventListener('mousemove', e => {
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            const r = card.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width;
+            const py = (e.clientY - r.top) / r.height;
+            card.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+            card.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+            if (!reduceMotion) {
+              card.style.transform =
+                `perspective(950px) rotateX(${((.5 - py) * maxTilt).toFixed(2)}deg) rotateY(${((px - .5) * maxTilt).toFixed(2)}deg) translateY(-6px)`;
+            }
+            raf = null;
+          });
+        });
+        card.addEventListener('mouseenter', () => playSegment(card, idx));
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+          stopSegment(card);
+        });
+      } else {
+        // Dokunmatik: karta dokun = çal / tekrar dokun = durdur
+        card.addEventListener('click', e => {
+          if (e.target.closest('a')) return;
+          if (card.classList.contains('is-playing')) stopSegment(card);
+          else playSegment(card, idx);
+        });
+      }
+    });
+  }
+
+  /* ── Hikâye fotoğrafları: scroll parallax ───────────────── */
+  const storyVisual = $('.story-visual');
+  if (storyVisual && !reduceMotion) {
+    const back = $('.story-photo:not(.story-photo--front)', storyVisual);
+    const front = $('.story-photo--front', storyVisual);
+    let ticking = false;
+    addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const r = storyVisual.getBoundingClientRect();
+        const p = Math.min(1, Math.max(0, 1 - (r.top + r.height / 2) / innerHeight)); // 0..1
+        if (back)  back.style.transform  = `translateY(${((p - .5) * -26).toFixed(1)}px)`;
+        if (front) front.style.transform = `rotate(3deg) translateY(${((p - .5) * 30).toFixed(1)}px)`;
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
   /* ── Newsletter (client-side demo) ──────────────────────── */
   const form = $('.newsletter-form');
   if (form) {
