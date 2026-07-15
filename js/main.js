@@ -427,11 +427,11 @@
         card.dataset.split = '1';
       }
       requestAnimationFrame(() => card.classList.add('is-opening'));
-      setTimeout(() => {                       // yarımlar açıldı, plak yükseldi
+      setTimeout(() => {                       // kapak açıldı, plak öne çıktı
         card.classList.add('is-flying');       // karttaki plağı gizle
         flyDisc(card, done);                   // klon pikaba uçar
         setTimeout(() => card.classList.remove('is-opening', 'is-flying'), 620);
-      }, 480);
+      }, 560);
     };
 
     $$('.release[data-audio]').forEach(card => {

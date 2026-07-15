@@ -751,27 +751,34 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
 .release.is-spinning { border-color: #131313; }
 .release.is-spinning .disc-peek { transform: translateX(30%) rotate(50deg); opacity: .35; }
 
-/* ── kapak ikiye ayrılıp plağı bırakır ──
+/* ── kapak kapı gibi öne açılır, plak içinden çıkar ──
    Tıklanınca JS kapağın iki yarısını (.sleeve-half) oluşturur:
-   yarımlar yana açılır, ortadan plak yükselir, sonra pikaba uçar. */
+   yarımlar dış kenarlarından menteşelenip izleyiciye doğru açılır
+   (çift kanatlı kapı gibi), aradan plak çıkar, sonra pikaba uçar. */
+.release .cover { perspective: 950px; }
 .sleeve-half {
   position: absolute; inset: 0; z-index: 3;
   background-size: cover; background-position: center;
-  transition: transform .55s var(--ease);
+  transition: transform .65s var(--ease), filter .65s;
   will-change: transform;
   pointer-events: none;
+  backface-visibility: visible;   /* kapağın içi, baskının aynası gibi görünsün */
 }
-.sleeve-half.left  { clip-path: inset(0 50% 0 0); }
-.sleeve-half.right { clip-path: inset(0 0 0 50%); }
-.release.is-opening .sleeve-half.left  { transform: translateX(-30%) rotate(-4deg); }
-.release.is-opening .sleeve-half.right { transform: translateX(30%) rotate(4deg); }
+.sleeve-half.left  { clip-path: inset(0 50% 0 0); transform-origin: left center; }
+.sleeve-half.right { clip-path: inset(0 0 0 50%); transform-origin: right center; }
+.release.is-opening { z-index: 6; }
+.release.is-opening, .release.is-opening .cover { overflow: visible; }
+.release.is-opening .sleeve-half.left  { transform: rotateY(-82deg); filter: brightness(.88); }
+.release.is-opening .sleeve-half.right { transform: rotateY(82deg);  filter: brightness(.88); }
 .release.is-opening .cover img { opacity: 0 !important; }
 .release.is-opening .new-tag,
 .release.is-opening .play { opacity: 0; }
+/* plak kapının içinden öne/yukarı süzülür */
 .release.is-opening .disc-peek {
-  transform: translateY(-14%) rotate(160deg) scale(1.04) !important;
+  transform: translateY(-16%) rotate(160deg) scale(1.12) !important;
   opacity: 1 !important;
-  transition: transform .55s var(--ease) .1s;
+  box-shadow: 0 26px 60px rgba(0,0,0,.45);
+  transition: transform .6s var(--ease) .18s;
 }
 .release.is-flying .disc-peek { opacity: 0 !important; transition: opacity .15s; }
 
