@@ -944,13 +944,15 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
 .member:hover .ghost-name { color: var(--tint); }
 /* hover'da beliren "şu an çalıyor" rozeti */
 .member-np {
-  position: absolute; top: 14px; left: 14px; z-index: 3;
+  position: absolute; top: 14px; left: 14px; right: 14px; z-index: 3;
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 7px 14px; border-radius: 100px;
-  background: rgba(255,255,255,.82); backdrop-filter: blur(8px);
+  width: fit-content; max-width: calc(100% - 28px);
+  padding: 7px 14px; border-radius: 16px;
+  background: rgba(255,255,255,.86); backdrop-filter: blur(8px);
   border: 1px solid var(--line);
   box-shadow: var(--shadow-sm);
-  font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
+  line-height: 1.4; white-space: normal;
   color: var(--mc);
   opacity: 0; transform: translateY(-6px);
   transition: opacity .35s, transform .35s var(--ease);
