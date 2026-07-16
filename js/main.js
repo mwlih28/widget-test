@@ -858,6 +858,31 @@
     }
   }
 
+  /* ── Wembley geri sayım ───────────────────────────────────
+     Gerçek tarih (16 Ekim 2026). Saniyede bir günceller. */
+  const cd = $('#countdown');
+  if (cd) {
+    const deadline = new Date(cd.dataset.deadline).getTime();
+    const dEl = $('.cd-d', cd), hEl = $('.cd-h', cd), mEl = $('.cd-m', cd), sEl = $('.cd-s', cd);
+    const pad = n => String(n).padStart(2, '0');
+    const tick = () => {
+      let diff = Math.floor((deadline - Date.now()) / 1000);
+      if (diff <= 0) {
+        cd.classList.add('is-live');
+        dEl.textContent = hEl.textContent = mEl.textContent = sEl.textContent = '00';
+        clearInterval(iv);
+        return;
+      }
+      const d = Math.floor(diff / 86400); diff %= 86400;
+      const h = Math.floor(diff / 3600); diff %= 3600;
+      const m = Math.floor(diff / 60); const s = diff % 60;
+      dEl.textContent = pad(d); hEl.textContent = pad(h);
+      mEl.textContent = pad(m); sEl.textContent = pad(s);
+    };
+    tick();
+    const iv = setInterval(tick, 1000);
+  }
+
   /* ── Footer year ────────────────────────────────────────── */
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
