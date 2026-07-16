@@ -1363,6 +1363,45 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
 }
 .tour-perks i { font-style: normal; }
 
+/* konser tarih listesi */
+.tour-list {
+  list-style: none; margin-top: clamp(28px, 4vw, 44px);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.tour-row {
+  display: flex; align-items: center; gap: 22px;
+  padding: 20px 26px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform .3s var(--ease), box-shadow .3s, border-color .3s;
+}
+.tour-row:hover { transform: translateX(6px); box-shadow: var(--shadow-md); }
+.tour-row--up { border-color: rgba(238,106,167,.4); }
+.tour-date {
+  flex: none; width: 92px; text-align: center;
+  display: flex; flex-direction: column; line-height: 1.1;
+}
+.tour-date b { font-family: var(--display); font-weight: 800; font-size: 22px; }
+.tour-date small { color: var(--muted); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; margin-top: 2px; }
+.tour-place { flex: 1; min-width: 0; border-left: 1px solid var(--line); padding-left: 22px; }
+.tour-place b { display: block; font-family: var(--display); font-weight: 700; font-size: 16.5px; }
+.tour-place small { color: var(--muted); font-size: 13.5px; }
+.tour-badge {
+  flex: none; padding: 8px 18px; border-radius: 100px;
+  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  background: rgba(17,17,17,.06); color: var(--muted);
+}
+.tour-badge--up { background: #131313; color: #fff; }
+.tour-row--up:hover .tour-badge--up { background: var(--c-lidya); }
+
+@media (max-width: 620px) {
+  .tour-row { flex-wrap: wrap; gap: 14px 18px; padding: 18px 20px; }
+  .tour-date { width: auto; flex-direction: row; align-items: baseline; gap: 6px; text-align: left; }
+  .tour-place { border-left: 0; padding-left: 0; flex-basis: 100%; order: 3; }
+  .tour-badge { margin-left: auto; }
+}
+
 /* ── press ──────────────────────────────────────────────────── */
 .press-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .press {
@@ -1540,7 +1579,6 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
   .timeline { grid-template-columns: repeat(2, 1fr); }
   .members { grid-template-columns: repeat(2, 1fr); }
   .press-grid { grid-template-columns: repeat(2, 1fr); }
-  .press:last-child { grid-column: span 2; }
   .releases { grid-template-columns: repeat(3, 1fr); }
 }
 
@@ -1562,7 +1600,6 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
   section { padding: 80px 0; }
   .members { grid-template-columns: 1fr; }
   .press-grid { grid-template-columns: 1fr; }
-  .press:last-child { grid-column: auto; }
   .timeline { grid-template-columns: 1fr; }
   .social-grid { grid-template-columns: 1fr; }
   .releases { grid-template-columns: repeat(2, 1fr); }
