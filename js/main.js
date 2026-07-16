@@ -786,6 +786,78 @@
     });
   }
 
+  /* ── Galeri lightbox ──────────────────────────────────────
+     Foto şeridindeki (gerçek, kopya olmayan) görsellere tıkla →
+     tam ekran galeri; ok/klavye/kaydırma ile gezin, ESC ile kapat. */
+  const lb = $('#lightbox');
+  if (lb) {
+    const stripItems = $$('.strip-item').filter(el => {
+      const img = $('img', el);
+      return img && img.getAttribute('aria-hidden') !== 'true' && img.getAttribute('alt');
+    });
+    const gallery = stripItems.map(el => {
+      const img = $('img', el);
+      return { src: img.src, alt: img.alt };
+    });
+    if (gallery.length) {
+      const lbImg = $('.lb-img', lb);
+      const lbCur = $('.lb-cur', lb);
+      const lbTotal = $('.lb-total', lb);
+      let idx = 0, lastFocus = null;
+      lbTotal.textContent = gallery.length;
+
+      const show = i => {
+        idx = (i + gallery.length) % gallery.length;
+        const g = gallery[idx];
+        lbImg.classList.add('is-swap');
+        setTimeout(() => {
+          lbImg.src = g.src; lbImg.alt = g.alt;
+          lbCur.textContent = idx + 1;
+          lbImg.classList.remove('is-swap');
+        }, reduceMotion ? 0 : 170);
+      };
+      const open = i => {
+        lastFocus = document.activeElement;
+        show(i);
+        lb.classList.add('is-open');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('no-scroll');
+        $('.lb-close', lb).focus();
+      };
+      const close = () => {
+        lb.classList.remove('is-open');
+        lb.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('no-scroll');
+        lastFocus?.focus?.();
+      };
+
+      stripItems.forEach((el, i) => {
+        el.setAttribute('role', 'button');
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('aria-label', (window.__lang === 'en' ? 'Open gallery' : 'Galeriyi aç'));
+        el.addEventListener('click', () => open(i));
+        el.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
+        });
+      });
+      $('.lb-prev', lb).addEventListener('click', () => show(idx - 1));
+      $('.lb-next', lb).addEventListener('click', () => show(idx + 1));
+      $$('[data-lb-close]', lb).forEach(el => el.addEventListener('click', close));
+      addEventListener('keydown', e => {
+        if (!lb.classList.contains('is-open')) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowLeft') show(idx - 1);
+        else if (e.key === 'ArrowRight') show(idx + 1);
+      });
+      let sx = 0;
+      lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - sx;
+        if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+      }, { passive: true });
+    }
+  }
+
   /* ── Footer year ────────────────────────────────────────── */
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
