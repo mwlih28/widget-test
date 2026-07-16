@@ -445,6 +445,7 @@
     const ttCover  = $('.tt-cover', tt);
     const ttTitle  = $('.tt-title', tt);
     const ttBar    = $('.tt-progress i', tt);
+    const ttProgress = $('.tt-progress', tt);
     const ttToggle = $('.tt-toggle', tt);
     const ttOpen   = $('.tt-open', tt);
     const ttClose  = $('.tt-close', tt);
@@ -560,9 +561,26 @@
     });
     ttClose.addEventListener('click', ttCloseAll);
     ttAudio.addEventListener('timeupdate', () => {
-      if (ttAudio.duration) ttBar.style.width = (ttAudio.currentTime / ttAudio.duration * 100) + '%';
+      if (!ttAudio.duration) return;
+      const pct = ttAudio.currentTime / ttAudio.duration * 100;
+      ttBar.style.width = pct + '%';
+      ttProgress.style.setProperty('--p', pct + '%');
     });
-    ttAudio.addEventListener('ended', () => { ttDoPause(); ttBar.style.width = '100%'; });
+    ttAudio.addEventListener('ended', () => {
+      ttDoPause(); ttBar.style.width = '100%'; ttProgress.style.setProperty('--p', '100%');
+    });
+    // tıklayarak ilerlet (seek)
+    const seekTo = clientX => {
+      if (!ttAudio.duration) return;
+      const r = ttProgress.getBoundingClientRect();
+      ttAudio.currentTime = Math.min(1, Math.max(0, (clientX - r.left) / r.width)) * ttAudio.duration;
+    };
+    ttProgress.addEventListener('click', e => seekTo(e.clientX));
+    ttProgress.addEventListener('keydown', e => {
+      if (!ttAudio.duration) return;
+      if (e.key === 'ArrowRight') { ttAudio.currentTime = Math.min(ttAudio.duration, ttAudio.currentTime + 3); e.preventDefault(); }
+      else if (e.key === 'ArrowLeft') { ttAudio.currentTime = Math.max(0, ttAudio.currentTime - 3); e.preventDefault(); }
+    });
   }
 
   /* ── Modal aç/kapat ───────────────────────────────────────── */
