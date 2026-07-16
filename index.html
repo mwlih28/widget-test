@@ -68,22 +68,23 @@
 
     <nav aria-label="Ana menü">
       <ul class="nav-links">
-        <li><a href="#hikaye">Hikâye</a></li>
-        <li><a href="#muzik">Müzik</a></li>
-        <li><a href="#uyeler">Üyeler</a></li>
-        <li><a href="#video">Video</a></li>
-        <li><a href="#konser">Konser</a></li>
-        <li><a href="#haberler">Haberler</a></li>
-        <li><a href="#sosyal">Sosyal</a></li>
+        <li><a href="#hikaye" data-en="Story">Hikâye</a></li>
+        <li><a href="#muzik" data-en="Music">Müzik</a></li>
+        <li><a href="#uyeler" data-en="Members">Üyeler</a></li>
+        <li><a href="#video" data-en="Video">Video</a></li>
+        <li><a href="#konser" data-en="Tour">Konser</a></li>
+        <li><a href="#haberler" data-en="Awards">Haberler</a></li>
+        <li><a href="#sosyal" data-en="Social">Sosyal</a></li>
         <li>
           <a class="nav-cta" href="https://open.spotify.com/intl-tr/artist/2WjzL05RyqIk5n53sZc9nf" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.5 17.3c-.2.36-.66.47-1 .25-2.8-1.7-6.3-2.1-10.44-1.15-.4.1-.8-.16-.9-.55-.08-.4.17-.8.56-.9 4.53-1.03 8.4-.58 11.53 1.33.36.2.47.67.25 1.02zm1.47-3.26c-.27.44-.85.58-1.3.3-3.2-1.96-8.07-2.53-11.85-1.38-.5.15-1.03-.13-1.18-.63-.15-.5.13-1.02.63-1.18 4.32-1.3 9.7-.67 13.38 1.6.45.27.6.86.32 1.3zm.13-3.4C15.24 8.4 8.94 8.2 5.28 9.3c-.6.18-1.23-.16-1.4-.75-.18-.6.15-1.22.75-1.4 4.2-1.28 11.18-1.03 15.6 1.6.53.32.7 1 .38 1.54-.32.53-1 .7-1.54.38z"/></svg>
-            Dinle
+            <span data-en="Listen">Dinle</span>
           </a>
         </li>
       </ul>
     </nav>
 
+    <button class="lang-toggle" type="button" aria-label="Switch language / Dil değiştir">EN</button>
     <button class="burger" aria-label="Menüyü aç/kapat" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -92,13 +93,13 @@
 
 <!-- Mobile drawer -->
 <div class="drawer">
-  <a href="#hikaye" style="--i:0">Hikâye <small>01</small></a>
-  <a href="#muzik" style="--i:1">Müzik <small>02</small></a>
-  <a href="#uyeler" style="--i:2">Üyeler <small>03</small></a>
-  <a href="#video" style="--i:3">Video <small>04</small></a>
-  <a href="#konser" style="--i:4">Konser <small>05</small></a>
-  <a href="#haberler" style="--i:5">Haberler <small>06</small></a>
-  <a href="#sosyal" style="--i:6">Sosyal <small>07</small></a>
+  <a href="#hikaye" style="--i:0" data-en-html="Story &lt;small&gt;01&lt;/small&gt;">Hikâye <small>01</small></a>
+  <a href="#muzik" style="--i:1" data-en-html="Music &lt;small&gt;02&lt;/small&gt;">Müzik <small>02</small></a>
+  <a href="#uyeler" style="--i:2" data-en-html="Members &lt;small&gt;03&lt;/small&gt;">Üyeler <small>03</small></a>
+  <a href="#video" style="--i:3" data-en-html="Video &lt;small&gt;04&lt;/small&gt;">Video <small>04</small></a>
+  <a href="#konser" style="--i:4" data-en-html="Tour &lt;small&gt;05&lt;/small&gt;">Konser <small>05</small></a>
+  <a href="#haberler" style="--i:5" data-en-html="Awards &lt;small&gt;06&lt;/small&gt;">Haberler <small>06</small></a>
+  <a href="#sosyal" style="--i:6" data-en-html="Social &lt;small&gt;07&lt;/small&gt;">Sosyal <small>07</small></a>
   <div class="drawer-foot">
     <a href="https://open.spotify.com/intl-tr/artist/2WjzL05RyqIk5n53sZc9nf" target="_blank" rel="noopener" style="--i:7">Spotify ↗</a>
     <a href="https://www.youtube.com/@m6nifestgirls" target="_blank" rel="noopener" style="--i:8">YouTube ↗</a>
@@ -117,23 +118,23 @@
     </div>
 
     <div class="hero-badge">
-      <span class="dot"></span> Yeni Single “Toz Pembe” Yayında
+      <span class="dot"></span> <span data-en="New Single “Toz Pembe” Out Now">Yeni Single “Toz Pembe” Yayında</span>
     </div>
 
     <h1 class="hero-logo">
       <img src="assets/img/logo.svg" alt="MANIFEST">
     </h1>
 
-    <p class="hero-sub">Altı Kız <strong>·</strong> Bir Enerji</p>
+    <p class="hero-sub" data-en-html="Six Girls &lt;strong&gt;·&lt;/strong&gt; One Energy">Altı Kız <strong>·</strong> Bir Enerji</p>
 
     <div class="hero-ctas">
       <a class="btn btn--grad" href="https://open.spotify.com/intl-tr/album/15p1byCMc7mi42zFKUziBJ" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-        Spotify’da Dinle
+        <span data-en="Listen on Spotify">Spotify’da Dinle</span>
       </a>
       <a class="btn btn--ghost" href="https://www.youtube.com/@m6nifestgirls" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4L15.8 12z"/></svg>
-        YouTube’da İzle
+        <span data-en="Watch on YouTube">YouTube’da İzle</span>
       </a>
     </div>
 
@@ -182,14 +183,14 @@
     <div class="wrap">
       <div class="story-grid">
         <div class="story-copy" data-reveal>
-          <div class="eyebrow"><span class="num">01</span> Hikâyemiz</div>
-          <h2 class="h2">Bir yarışmadan doğan <em>bir hareket</em></h2>
-          <p>Her şey <strong>Big5 Türkiye</strong> sahnesinde başladı. Binlerce yetenek arasından öne çıkan altı genç kadın — <strong>Esin, Hilal, Lidya, Mina, Sueda ve Zeynep</strong> — önce rakip, sonra dost, en sonunda tek bir kalp oldular.</p>
-          <p>Bugün Manifest; modern pop sound’u, güçlü sahne enerjisi ve durdurulamaz kadın gücüyle Türkiye’nin en büyük kız grubu olarak kendi evrenini adım adım inşa ediyor.</p>
+          <div class="eyebrow"><span class="num">01</span> <span data-en="Our Story">Hikâyemiz</span></div>
+          <h2 class="h2" data-en-html="A movement born &lt;em&gt;from a contest&lt;/em&gt;">Bir yarışmadan doğan <em>bir hareket</em></h2>
+          <p data-en-html="It all began on the &lt;strong&gt;Big5 Türkiye&lt;/strong&gt; stage. Six young women who rose above thousands of talents — &lt;strong&gt;Esin, Hilal, Lidya, Mina, Sueda and Zeynep&lt;/strong&gt; — became first rivals, then friends, and finally a single heart.">Her şey <strong>Big5 Türkiye</strong> sahnesinde başladı. Binlerce yetenek arasından öne çıkan altı genç kadın — <strong>Esin, Hilal, Lidya, Mina, Sueda ve Zeynep</strong> — önce rakip, sonra dost, en sonunda tek bir kalp oldular.</p>
+          <p data-en="Today Manifest builds its own universe step by step as Türkiye’s biggest girl group — with a modern pop sound, powerful stage energy and unstoppable girl power.">Bugün Manifest; modern pop sound’u, güçlü sahne enerjisi ve durdurulamaz kadın gücüyle Türkiye’nin en büyük kız grubu olarak kendi evrenini adım adım inşa ediyor.</p>
           <div class="stats">
-            <div class="stat" data-reveal style="--d:1"><b data-count="6">0</b><small>Üye</small></div>
-            <div class="stat" data-reveal style="--d:2"><b data-count="2">0</b><small>Albüm</small></div>
-            <div class="stat" data-reveal style="--d:3"><b>∞</b><small>Enerji</small></div>
+            <div class="stat" data-reveal style="--d:1"><b data-count="6">0</b><small data-en="Members">Üye</small></div>
+            <div class="stat" data-reveal style="--d:2"><b data-count="2">0</b><small data-en="Albums">Albüm</small></div>
+            <div class="stat" data-reveal style="--d:3"><b>∞</b><small data-en="Energy">Enerji</small></div>
           </div>
         </div>
 
@@ -209,24 +210,24 @@
 
       <div class="timeline">
         <div class="tl-item" data-reveal>
-          <span class="tl-tag">Başlangıç</span>
+          <span class="tl-tag" data-en="Beginning">Başlangıç</span>
           <h3>Big5 Türkiye</h3>
-          <p>Televizyonda milyonların izlediği yarışmada altı yetenek sahneye çıktı ve kaderleri kesişti.</p>
+          <p data-en="Six talents took the stage in a contest watched by millions on TV, and their fates crossed.">Televizyonda milyonların izlediği yarışmada altı yetenek sahneye çıktı ve kaderleri kesişti.</p>
         </div>
         <div class="tl-item" data-reveal style="--d:1">
-          <span class="tl-tag">Doğuş</span>
-          <h3>Manifest Kuruldu</h3>
-          <p>Rakipler dosta, dostlar aileye dönüştü. Altı ses tek bir isim altında birleşti: Manifest.</p>
+          <span class="tl-tag" data-en="Genesis">Doğuş</span>
+          <h3 data-en="Manifest Is Born">Manifest Kuruldu</h3>
+          <p data-en="Rivals turned to friends, friends to family. Six voices united under one name: Manifest.">Rakipler dosta, dostlar aileye dönüştü. Altı ses tek bir isim altında birleşti: Manifest.</p>
         </div>
         <div class="tl-item" data-reveal style="--d:2">
-          <span class="tl-tag">Çıkış</span>
-          <h3>İlk Single’lar</h3>
-          <p>“Zamansızdık” ve “Arıyo” ile listeleri sarstılar; sosyal medyada bir fenomen doğdu.</p>
+          <span class="tl-tag" data-en="Breakout">Çıkış</span>
+          <h3 data-en="First Singles">İlk Single’lar</h3>
+          <p data-en="They shook the charts with “Zamansızdık” and “Arıyo”; a social-media phenomenon was born.">“Zamansızdık” ve “Arıyo” ile listeleri sarstılar; sosyal medyada bir fenomen doğdu.</p>
         </div>
         <div class="tl-item" data-reveal style="--d:3">
-          <span class="tl-tag">Zirve</span>
+          <span class="tl-tag" data-en="Peak">Zirve</span>
           <h3>Manifestival</h3>
-          <p>Debut albüm ve deluxe sürümü yayında. Sıradaki durak: sahneler, turneler ve dünya.</p>
+          <p data-en="The debut album and its deluxe edition are out. Next stop: stages, tours and the world.">Debut albüm ve deluxe sürümü yayında. Sıradaki durak: sahneler, turneler ve dünya.</p>
         </div>
       </div>
     </div>
@@ -236,9 +237,9 @@
   <section id="muzik" class="section--alt">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <div class="eyebrow"><span class="num">02</span> Müzik</div>
-        <h2 class="h2">Sound’umuzu <em>hisset</em></h2>
-        <p class="lead">Debut albümümüz Manifestival ve tüm single’larımız Spotify, Apple Music ve YouTube’da seni bekliyor.</p>
+        <div class="eyebrow"><span class="num">02</span> <span data-en="Music">Müzik</span></div>
+        <h2 class="h2" data-en-html="Feel &lt;em&gt;our sound&lt;/em&gt;">Sound’umuzu <em>hisset</em></h2>
+        <p class="lead" data-en="Our debut album Manifestival and every single are waiting for you on Spotify, Apple Music and YouTube.">Debut albümümüz Manifestival ve tüm single’larımız Spotify, Apple Music ve YouTube’da seni bekliyor.</p>
       </div>
 
       <div class="album">
@@ -249,15 +250,15 @@
           <div class="album-vinyl" aria-hidden="true"></div>
         </div>
         <div class="album-info" data-reveal style="--d:2">
-          <span class="album-tag">Debut Albüm</span>
+          <span class="album-tag" data-en="Debut Album">Debut Albüm</span>
           <h3>Manifestival</h3>
-          <p>Altı sesin tek bir enerjide buluştuğu ilk albümümüz. Pop, dans ve saf duygunun manifestosu — baştan sona bir festival. Deluxe sürümüyle birlikte şimdi tüm platformlarda.</p>
+          <p data-en="Our first album, where six voices meet in one energy. A manifesto of pop, dance and pure emotion — a festival from start to finish. Now on all platforms, deluxe edition included.">Altı sesin tek bir enerjide buluştuğu ilk albümümüz. Pop, dans ve saf duygunun manifestosu — baştan sona bir festival. Deluxe sürümüyle birlikte şimdi tüm platformlarda.</p>
           <div class="album-ctas">
             <a class="btn btn--grad" href="https://open.spotify.com/intl-tr/album/15p1byCMc7mi42zFKUziBJ" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-              Albümü Dinle
+              <span data-en="Play Album">Albümü Dinle</span>
             </a>
-            <a class="btn btn--ghost" href="https://open.spotify.com/intl-tr/album/0MpedZcfZuHSMgIHacjRFL" target="_blank" rel="noopener">Deluxe Sürüm</a>
+            <a class="btn btn--ghost" href="https://open.spotify.com/intl-tr/album/0MpedZcfZuHSMgIHacjRFL" target="_blank" rel="noopener" data-en="Deluxe Edition">Deluxe Sürüm</a>
           </div>
         </div>
       </div>
@@ -265,43 +266,43 @@
       <div class="releases">
         <a class="release release--new" href="https://music.apple.com/tr/album/toz-pembe/6784751861?i=6784751987" target="_blank" rel="noopener" data-audio="assets/audio/toz-pembe-preview.mp3" data-title="Toz Pembe" data-reveal>
           <span class="cover"><span class="disc-peek" aria-hidden="true"></span><img src="assets/img/cover-tozpembe.jpg" alt="Toz Pembe kapağı" loading="lazy"><span class="new-tag">Yeni</span><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-          <span class="release-body"><b>Toz Pembe</b><small>Yeni Single · 2026</small></span>
+          <span class="release-body"><b>Toz Pembe</b><small data-en="New Single · 2026">Yeni Single · 2026</small></span>
         </a>
         <a class="release" href="https://open.spotify.com/intl-tr/album/0MpedZcfZuHSMgIHacjRFL" target="_blank" rel="noopener" data-audio="assets/audio/preview-snap.mp3" data-title="Snap" data-reveal>
           <span class="cover"><span class="disc-peek" aria-hidden="true"></span><img src="assets/img/cover-deluxe.webp" alt="Manifestival Deluxe kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-          <span class="release-body"><b>Manifestival (Deluxe)</b><small>Albüm</small></span>
+          <span class="release-body"><b>Manifestival (Deluxe)</b><small data-en="Album">Albüm</small></span>
         </a>
         <a class="release" href="https://open.spotify.com/album/6PI0ZfIq5UV3kLlpA5RkXE" target="_blank" rel="noopener" data-audio="assets/audio/preview-zamansizdik.mp3" data-title="Zamansızdık" data-reveal style="--d:1">
           <span class="cover"><span class="disc-peek" aria-hidden="true"></span><img src="assets/img/cover-zamansizdik.webp" alt="Zamansızdık kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-          <span class="release-body"><b>Zamansızdık</b><small>Single</small></span>
+          <span class="release-body"><b>Zamansızdık</b><small data-en="Single">Single</small></span>
         </a>
         <a class="release" href="https://open.spotify.com/album/48i9T2rTEgtK7K5j44Hq92" target="_blank" rel="noopener" data-audio="assets/audio/preview-ariyo.mp3" data-title="Arıyo" data-reveal style="--d:2">
           <span class="cover"><span class="disc-peek" aria-hidden="true"></span><img src="assets/img/cover-ariyo.webp" alt="Arıyo kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-          <span class="release-body"><b>Arıyo</b><small>Single</small></span>
+          <span class="release-body"><b>Arıyo</b><small data-en="Single">Single</small></span>
         </a>
         <a class="release" href="https://open.spotify.com/intl-tr/track/67AMcEV9GTOlxs1NAvUDiU" target="_blank" rel="noopener" data-audio="assets/audio/preview-ruya.mp3" data-title="Rüya" data-reveal style="--d:3">
           <span class="cover"><span class="disc-peek" aria-hidden="true"></span><img src="assets/img/cover-ruya.webp" alt="Rüya kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-          <span class="release-body"><b>Rüya</b><small>Single</small></span>
+          <span class="release-body"><b>Rüya</b><small data-en="Single">Single</small></span>
         </a>
         <a class="release" href="https://open.spotify.com/intl-tr/track/2AhfH5OG1o12XEqGZUgEPT" target="_blank" rel="noopener" data-audio="assets/audio/preview-dahaiyi.mp3" data-title="Daha İyi" data-reveal style="--d:4">
           <span class="cover"><span class="disc-peek" aria-hidden="true"></span><img src="assets/img/cover-dahaiyi.webp" alt="Daha İyi kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-          <span class="release-body"><b>Daha İyi</b><small>Single</small></span>
+          <span class="release-body"><b>Daha İyi</b><small data-en="Single">Single</small></span>
         </a>
         <a class="release" href="https://open.spotify.com/intl-tr/track/4eBE6hpwm7aJxIY4iwgwU8" target="_blank" rel="noopener" data-reveal>
           <span class="cover"><img src="assets/img/cover-hileli.webp" alt="Hileli kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-          <span class="release-body"><b>Hileli</b><small>Single</small></span>
+          <span class="release-body"><b>Hileli</b><small data-en="Single">Single</small></span>
         </a>
         <a class="release" href="https://open.spotify.com/intl-tr/track/4yHSp3OunMQmvSbIgy2Hhm" target="_blank" rel="noopener" data-audio="assets/audio/preview-amator.mp3" data-title="Amatör" data-reveal style="--d:1">
           <span class="cover"><span class="disc-peek" aria-hidden="true"></span><img src="assets/img/cover-amator.webp" alt="Amatör kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-          <span class="release-body"><b>Amatör</b><small>Single</small></span>
+          <span class="release-body"><b>Amatör</b><small data-en="Single">Single</small></span>
         </a>
         <a class="release" href="https://open.spotify.com/intl-tr/track/1LJ8ODaoio5lJMgtXzALMw" target="_blank" rel="noopener" data-audio="assets/audio/preview-amateur.mp3" data-title="Amateur" data-reveal style="--d:2">
           <span class="cover"><span class="disc-peek" aria-hidden="true"></span><img src="assets/img/cover-amateur.webp" alt="Amateur kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-          <span class="release-body"><b>Amateur</b><small>Single · English</small></span>
+          <span class="release-body"><b>Amateur</b><small data-en="Single · English">Single · English</small></span>
         </a>
         <a class="release" href="https://open.spotify.com/intl-tr/track/7JOZ88jJbmx9TIzpPJBCqi" target="_blank" rel="noopener" data-audio="assets/audio/preview-basrol.mp3" data-title="Başrol Sensin" data-reveal style="--d:3">
           <span class="cover"><span class="disc-peek" aria-hidden="true"></span><img src="assets/img/cover-basrol.webp" alt="Başrol Sensin kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
-          <span class="release-body"><b>Başrol Sensin</b><small>1. Yıl Özel</small></span>
+          <span class="release-body"><b>Başrol Sensin</b><small data-en="1st Year Special">1. Yıl Özel</small></span>
         </a>
         <a class="release" href="https://open.spotify.com/intl-tr/track/7sqVyROuBW4xQc2ANlCLHJ" target="_blank" rel="noopener" data-audio="assets/audio/preview-zehir.mp3" data-title="Zehir (Remix)" data-reveal style="--d:4">
           <span class="cover"><span class="disc-peek" aria-hidden="true"></span><img src="assets/img/cover-zehir.webp" alt="Zehir Remix kapağı" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span>
@@ -309,8 +310,8 @@
         </a>
         <a class="release release--all" href="https://open.spotify.com/intl-tr/artist/2WjzL05RyqIk5n53sZc9nf" target="_blank" rel="noopener" data-reveal style="--d:4">
           <span class="release-all-inner">
-            <b>Tüm şarkılar</b>
-            <small>Spotify’da dinle</small>
+            <b data-en="All songs">Tüm şarkılar</b>
+            <small data-en="Listen on Spotify">Spotify’da dinle</small>
             <span class="arrow">→</span>
           </span>
         </a>
@@ -326,9 +327,9 @@
   <section id="uyeler">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <div class="eyebrow"><span class="num">03</span> Üyeler</div>
-        <h2 class="h2">Altı ses, <em>tek kalp</em></h2>
-        <p class="lead">Sarı, mor, pembe, kırmızı, yeşil ve mavi — altı renk birleşince <strong>beyaz</strong> eder. Kartın üzerine gel: kart 3 boyutlu eğilir, üyenin rengi yanar ve “Toz Pembe” çalmaya başlar. Rozette her üyenin şarkıda gerçekten söylediği saniyeler yazar. 🎧</p>
+        <div class="eyebrow"><span class="num">03</span> <span data-en="Members">Üyeler</span></div>
+        <h2 class="h2" data-en-html="Six voices, &lt;em&gt;one heart&lt;/em&gt;">Altı ses, <em>tek kalp</em></h2>
+        <p class="lead" data-en-html="Yellow, purple, pink, red, green and blue — six colors combine into &lt;strong&gt;white&lt;/strong&gt;. Hover a card: it tilts in 3D, the member’s color lights up and “Toz Pembe” starts playing. The badge shows the exact seconds each member really sings in the song. 🎧">Sarı, mor, pembe, kırmızı, yeşil ve mavi — altı renk birleşince <strong>beyaz</strong> eder. Kartın üzerine gel: kart 3 boyutlu eğilir, üyenin rengi yanar ve “Toz Pembe” çalmaya başlar. Rozette her üyenin şarkıda gerçekten söylediği saniyeler yazar. 🎧</p>
       </div>
 
       <div class="members">
@@ -343,7 +344,7 @@
             <div class="member-role">Sarı · Ana Dansçı</div>
             <p>Sahneye çıktığı an atmosferi değiştirir. Duygusal derinliği ve sahne hakimiyetiyle her performansa iz bırakır.</p>
             <div class="member-socials">
-              <button class="member-more" type="button">Detay <span aria-hidden="true">↗</span></button>
+              <button class="member-more" type="button"><span data-en="Details">Detay</span> <span aria-hidden="true">↗</span></button>
               <a href="https://www.instagram.com/esin.bahat/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2a6.6 6.6 0 1 0 0 13.2 6.6 6.6 0 0 0 0-13.2zm0 10.9a4.3 4.3 0 1 1 0-8.6 4.3 4.3 0 0 1 0 8.6zm8.4-11.1a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg></a>
               <a href="https://www.tiktok.com/@esinbahat" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.6 6.7a5 5 0 0 1-3.8-4.2V2h-3.4v13.4a2.9 2.9 0 1 1-2-2.7V9.2a6.3 6.3 0 1 0 5.4 6.2V8.6a8.3 8.3 0 0 0 4.4 1.3V6.7h-.6z"/></svg></a>
             </div>
@@ -361,7 +362,7 @@
             <div class="member-role">Mor · Baş Dansçı</div>
             <p>Tam bir fırtına. Kalbe dokunan vokalleri ve tavizsiz enerjisiyle dinleyeni ilk saniyeden yakalar.</p>
             <div class="member-socials">
-              <button class="member-more" type="button">Detay <span aria-hidden="true">↗</span></button>
+              <button class="member-more" type="button"><span data-en="Details">Detay</span> <span aria-hidden="true">↗</span></button>
               <a href="https://www.instagram.com/hilalyelekci/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2a6.6 6.6 0 1 0 0 13.2 6.6 6.6 0 0 0 0-13.2zm0 10.9a4.3 4.3 0 1 1 0-8.6 4.3 4.3 0 0 1 0 8.6zm8.4-11.1a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg></a>
               <a href="https://www.tiktok.com/@hilalyelekci" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.6 6.7a5 5 0 0 1-3.8-4.2V2h-3.4v13.4a2.9 2.9 0 1 1-2-2.7V9.2a6.3 6.3 0 1 0 5.4 6.2V8.6a8.3 8.3 0 0 0 4.4 1.3V6.7h-.6z"/></svg></a>
             </div>
@@ -379,7 +380,7 @@
             <div class="member-role">Pembe · Baş Vokalist</div>
             <p>Zarafetle gücü aynı bedende buluşturur. Her hareketi estetik, her notası kararlılık dolu.</p>
             <div class="member-socials">
-              <button class="member-more" type="button">Detay <span aria-hidden="true">↗</span></button>
+              <button class="member-more" type="button"><span data-en="Details">Detay</span> <span aria-hidden="true">↗</span></button>
               <a href="https://www.instagram.com/pynarlidia/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2a6.6 6.6 0 1 0 0 13.2 6.6 6.6 0 0 0 0-13.2zm0 10.9a4.3 4.3 0 1 1 0-8.6 4.3 4.3 0 0 1 0 8.6zm8.4-11.1a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg></a>
               <a href="https://www.tiktok.com/@pynarlidia" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.6 6.7a5 5 0 0 1-3.8-4.2V2h-3.4v13.4a2.9 2.9 0 1 1-2-2.7V9.2a6.3 6.3 0 1 0 5.4 6.2V8.6a8.3 8.3 0 0 0 4.4 1.3V6.7h-.6z"/></svg></a>
             </div>
@@ -397,7 +398,7 @@
             <div class="member-role">Kırmızı · Vokalist</div>
             <p>Korkusuz ve güçlü. Sınırları zorlayan performanslarıyla sahnenin ateşini her zaman yüksek tutar.</p>
             <div class="member-socials">
-              <button class="member-more" type="button">Detay <span aria-hidden="true">↗</span></button>
+              <button class="member-more" type="button"><span data-en="Details">Detay</span> <span aria-hidden="true">↗</span></button>
               <a href="https://www.instagram.com/minasolakk/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2a6.6 6.6 0 1 0 0 13.2 6.6 6.6 0 0 0 0-13.2zm0 10.9a4.3 4.3 0 1 1 0-8.6 4.3 4.3 0 0 1 0 8.6zm8.4-11.1a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg></a>
               <a href="https://www.tiktok.com/@minasolakk" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.6 6.7a5 5 0 0 1-3.8-4.2V2h-3.4v13.4a2.9 2.9 0 1 1-2-2.7V9.2a6.3 6.3 0 1 0 5.4 6.2V8.6a8.3 8.3 0 0 0 4.4 1.3V6.7h-.6z"/></svg></a>
             </div>
@@ -415,7 +416,7 @@
             <div class="member-role">Yeşil · Ana Vokalist</div>
             <p>Saf enerji. Sınır tanımayan ruhu ve bulaşıcı neşesiyle grubun kalp atışını hızlandırır.</p>
             <div class="member-socials">
-              <button class="member-more" type="button">Detay <span aria-hidden="true">↗</span></button>
+              <button class="member-more" type="button"><span data-en="Details">Detay</span> <span aria-hidden="true">↗</span></button>
               <a href="https://www.instagram.com/suedaauluca/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2a6.6 6.6 0 1 0 0 13.2 6.6 6.6 0 0 0 0-13.2zm0 10.9a4.3 4.3 0 1 1 0-8.6 4.3 4.3 0 0 1 0 8.6zm8.4-11.1a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg></a>
               <a href="https://www.tiktok.com/@suedauluca" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.6 6.7a5 5 0 0 1-3.8-4.2V2h-3.4v13.4a2.9 2.9 0 1 1-2-2.7V9.2a6.3 6.3 0 1 0 5.4 6.2V8.6a8.3 8.3 0 0 0 4.4 1.3V6.7h-.6z"/></svg></a>
             </div>
@@ -433,7 +434,7 @@
             <div class="member-role">Mavi · Vokalist</div>
             <p>Sakin özgüveni ve sarsılmaz enerjisiyle grubun dengesini kurar; sessiz ama derin bir güç.</p>
             <div class="member-socials">
-              <button class="member-more" type="button">Detay <span aria-hidden="true">↗</span></button>
+              <button class="member-more" type="button"><span data-en="Details">Detay</span> <span aria-hidden="true">↗</span></button>
               <a href="https://www.instagram.com/zeynep.okktay/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2a6.6 6.6 0 1 0 0 13.2 6.6 6.6 0 0 0 0-13.2zm0 10.9a4.3 4.3 0 1 1 0-8.6 4.3 4.3 0 0 1 0 8.6zm8.4-11.1a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg></a>
               <a href="https://www.tiktok.com/@zeynep.okktay" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.6 6.7a5 5 0 0 1-3.8-4.2V2h-3.4v13.4a2.9 2.9 0 1 1-2-2.7V9.2a6.3 6.3 0 1 0 5.4 6.2V8.6a8.3 8.3 0 0 0 4.4 1.3V6.7h-.6z"/></svg></a>
             </div>
@@ -441,7 +442,7 @@
         </article>
       </div>
 
-      <p class="members-note">
+      <p class="members-note" data-en="* The time ranges on each badge are the exact moments each member sings in “Toz Pembe”. The audio on the cards is iTunes’ official 30-second preview (roughly the song’s 0:48–1:18; we don’t host the full track for copyright reasons). That window lines up exactly with Sueda (0:48–1:04) and Esin (1:05–1:18), so their two cards play their real moments; the others play the same preview — hear their own parts in the full song via “Full song ↗”.">
         * Rozetteki zaman aralıkları, üyelerin “Toz Pembe”de söylediği anlardır. Kartlarda çalan ses, iTunes’un
         30 sn’lik resmî önizlemesidir (şarkının ~0:48–1:18 aralığı; telif nedeniyle tam parçayı barındırmıyoruz).
         Bu pencere Sueda (0:48–1:04) ve Esin (1:05–1:18) ile birebir örtüştüğü için o iki kartta kendi gerçek
@@ -455,9 +456,9 @@
   <section id="video" class="section--alt">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <div class="eyebrow"><span class="num">04</span> Video</div>
-        <h2 class="h2">Sahnede <em>bizi izle</em></h2>
-        <p class="lead">Klipler, canlı performanslar ve kamera arkası — hepsi YouTube kanalımızda.</p>
+        <div class="eyebrow"><span class="num">04</span> <span data-en="Video">Video</span></div>
+        <h2 class="h2" data-en-html="Watch us &lt;em&gt;on stage&lt;/em&gt;">Sahnede <em>bizi izle</em></h2>
+        <p class="lead" data-en="Music videos, live performances and behind the scenes — all on our YouTube channel.">Klipler, canlı performanslar ve kamera arkası — hepsi YouTube kanalımızda.</p>
       </div>
 
       <div class="video-grid">
@@ -465,24 +466,24 @@
           <span class="video-thumb"><img src="assets/img/video-1.webp" alt="" loading="lazy"></span>
           <span class="play-orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="video-meta">
-            <b>YouTube Kanalımız</b>
-            <small>@m6nifestgirls · Klipler &amp; Performanslar</small>
+            <b data-en="Our YouTube Channel">YouTube Kanalımız</b>
+            <small data-en="@m6nifestgirls · Videos &amp; Performances">@m6nifestgirls · Klipler &amp; Performanslar</small>
           </span>
         </a>
         <a class="video-card video-card--sm" href="https://www.youtube.com/@m6nifestgirls" target="_blank" rel="noopener" data-reveal style="--d:1">
           <span class="video-thumb"><img src="assets/img/video-2.webp" alt="" loading="lazy"></span>
           <span class="play-orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="video-meta">
-            <b>Canlı Performanslar</b>
-            <small>Sahne Enerjisi</small>
+            <b data-en="Live Performances">Canlı Performanslar</b>
+            <small data-en="Stage Energy">Sahne Enerjisi</small>
           </span>
         </a>
         <a class="video-card video-card--sm" href="https://www.youtube.com/@m6nifestgirls" target="_blank" rel="noopener" data-reveal style="--d:2">
           <span class="video-thumb"><img src="assets/img/video-3.webp" alt="" loading="lazy"></span>
           <span class="play-orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
           <span class="video-meta">
-            <b>Kamera Arkası</b>
-            <small>Vlog &amp; Backstage</small>
+            <b data-en="Behind the Scenes">Kamera Arkası</b>
+            <small data-en="Vlog &amp; Backstage">Vlog &amp; Backstage</small>
           </span>
         </a>
       </div>
@@ -496,41 +497,41 @@
         <span class="tour-bg" aria-hidden="true"><img src="assets/img/concert.webp" alt="" loading="lazy"></span>
         <span class="star" aria-hidden="true">✦</span>
         <span class="star" aria-hidden="true">✦</span>
-        <div class="eyebrow" style="justify-content:center"><span class="num">05</span> Konser</div>
-        <h2>Wembley’de <em>tarih yazıyoruz</em></h2>
-        <p>Manifest ilk dünya konserinde 16 Ekim’de Londra Wembley Arena sahnesinde. Ülker Arena’daki dört gecelik seri ve Manifestival kapalı gişe geçti — sıradaki durak dünya.</p>
+        <div class="eyebrow" style="justify-content:center"><span class="num">05</span> <span data-en="Tour">Konser</span></div>
+        <h2 data-en-html="Making history &lt;em&gt;at Wembley&lt;/em&gt;">Wembley’de <em>tarih yazıyoruz</em></h2>
+        <p data-en="Manifest plays its first world concert at London’s Wembley Arena on October 16. The four-night Ülker Arena run and Manifestival sold out — next stop, the world.">Manifest ilk dünya konserinde 16 Ekim’de Londra Wembley Arena sahnesinde. Ülker Arena’daki dört gecelik seri ve Manifestival kapalı gişe geçti — sıradaki durak dünya.</p>
         <div class="tour-perks">
-          <span><i>🏟️</i> Wembley Arena</span>
-          <span><i>💃</i> Koreografi Şovu</span>
-          <span><i>✨</i> Sahne Prodüksiyonu</span>
-          <span><i>🌍</i> İlk Dünya Konseri</span>
+          <span><i>🏟️</i> <span data-en="Wembley Arena">Wembley Arena</span></span>
+          <span><i>💃</i> <span data-en="Choreography Show">Koreografi Şovu</span></span>
+          <span><i>✨</i> <span data-en="Stage Production">Sahne Prodüksiyonu</span></span>
+          <span><i>🌍</i> <span data-en="First World Concert">İlk Dünya Konseri</span></span>
         </div>
         <a class="btn btn--light" href="https://manifestgirlband.com/tr/biletlerimiz/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 10V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 1 0 4v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 1 0-4zm-9 7.5h-2v-2h2zm0-4.5h-2v-2h2zm0-4.5h-2v-2h2z"/></svg>
-          Bilet Al
+          <span data-en="Get Tickets">Bilet Al</span>
         </a>
       </div>
 
       <ul class="tour-list">
         <li class="tour-row tour-row--up" data-reveal>
-          <span class="tour-date"><b>16</b><small>Eki 2026</small></span>
-          <span class="tour-place"><b>Wembley Arena</b><small>Londra · İlk Dünya Konseri</small></span>
-          <span class="tour-badge tour-badge--up">Bilet</span>
+          <span class="tour-date"><b>16</b><small data-en="Oct 2026">Eki 2026</small></span>
+          <span class="tour-place"><b>Wembley Arena</b><small data-en="London · First World Concert">Londra · İlk Dünya Konseri</small></span>
+          <span class="tour-badge tour-badge--up" data-en="Tickets">Bilet</span>
         </li>
         <li class="tour-row" data-reveal style="--d:1">
-          <span class="tour-date"><b>10–12</b><small>Tem 2026</small></span>
-          <span class="tour-place"><b>Manifestival İstanbul</b><small>Festival Park Yenikapı</small></span>
-          <span class="tour-badge">Tükendi</span>
+          <span class="tour-date"><b>10–12</b><small data-en="Jul 2026">Tem 2026</small></span>
+          <span class="tour-place"><b>Manifestival İstanbul</b><small data-en="Festival Park Yenikapı">Festival Park Yenikapı</small></span>
+          <span class="tour-badge" data-en="Sold Out">Tükendi</span>
         </li>
         <li class="tour-row" data-reveal style="--d:2">
-          <span class="tour-date"><b>6–7</b><small>Haz 2026</small></span>
-          <span class="tour-place"><b>Manifestival Ankara</b><small>Atatürk Orman Çiftliği</small></span>
-          <span class="tour-badge">Tükendi</span>
+          <span class="tour-date"><b>6–7</b><small data-en="Jun 2026">Haz 2026</small></span>
+          <span class="tour-place"><b>Manifestival Ankara</b><small data-en="Atatürk Forest Farm, Ankara">Atatürk Orman Çiftliği</small></span>
+          <span class="tour-badge" data-en="Sold Out">Tükendi</span>
         </li>
         <li class="tour-row" data-reveal style="--d:3">
-          <span class="tour-date"><b>15–18</b><small>May 2026</small></span>
-          <span class="tour-place"><b>Ülker Spor ve Etkinlik Salonu</b><small>İstanbul · 4 Gece</small></span>
-          <span class="tour-badge">Tükendi</span>
+          <span class="tour-date"><b>15–18</b><small data-en="May 2026">May 2026</small></span>
+          <span class="tour-place"><b>Ülker Spor ve Etkinlik Salonu</b><small data-en="Istanbul · 4 Nights">İstanbul · 4 Gece</small></span>
+          <span class="tour-badge" data-en="Sold Out">Tükendi</span>
         </li>
       </ul>
     </div>
@@ -540,41 +541,41 @@
   <section id="haberler" class="section--alt">
     <div class="wrap">
       <div class="section-head center" data-reveal>
-        <div class="eyebrow"><span class="num">06</span> Ödüller &amp; Rekorlar</div>
-        <h2 class="h2">Bir yılda <em>bir fenomen</em></h2>
-        <p class="lead">Big5 sahnesinden çıkışından bu yana Manifest’in kırdığı rekorlar ve kazandığı ödüller.</p>
+        <div class="eyebrow"><span class="num">06</span> <span data-en="Awards &amp; Records">Ödüller &amp; Rekorlar</span></div>
+        <h2 class="h2" data-en-html="A phenomenon &lt;em&gt;in one year&lt;/em&gt;">Bir yılda <em>bir fenomen</em></h2>
+        <p class="lead" data-en="The records Manifest has broken and the awards it has won since breaking out on the Big5 stage.">Big5 sahnesinden çıkışından bu yana Manifest’in kırdığı rekorlar ve kazandığı ödüller.</p>
       </div>
 
       <div class="press-grid">
         <article class="press" data-reveal>
           <div class="mark" aria-hidden="true">🏆</div>
-          <blockquote>“En Güçlü Yükselen Grup” — 8. PowerTürk Müzik Ödülleri’nde yılın çıkışı seçildi.</blockquote>
-          <cite>PowerTürk Müzik Ödülleri · 2026</cite>
+          <blockquote data-en="“Strongest Rising Group” — named the breakout of the year at the 8th PowerTürk Music Awards.">“En Güçlü Yükselen Grup” — 8. PowerTürk Müzik Ödülleri’nde yılın çıkışı seçildi.</blockquote>
+          <cite data-en="PowerTürk Music Awards · 2026">PowerTürk Müzik Ödülleri · 2026</cite>
         </article>
         <article class="press" data-reveal style="--d:1">
           <div class="mark" aria-hidden="true">🥇</div>
-          <blockquote>“Yılın En Başarılı Çıkış Yapan Grubu” ödülüyle daha ilk yılında sahneye damga vurdu.</blockquote>
+          <blockquote data-en="Won “Most Successful Breakout Group of the Year” and made its mark in its very first year.">“Yılın En Başarılı Çıkış Yapan Grubu” ödülüyle daha ilk yılında sahneye damga vurdu.</blockquote>
           <cite>No7 Influencer Awards · 2025</cite>
         </article>
         <article class="press" data-reveal style="--d:2">
           <div class="mark" aria-hidden="true">🦌</div>
-          <blockquote>“Yılın Müzik Grubu” ve “Zamansızdık” ile en iyi single ödülünü aldı.</blockquote>
-          <cite>Kristal Geyik Ödülleri · 2025</cite>
+          <blockquote data-en="Won “Music Group of the Year” and Best Single for “Zamansızdık”.">“Yılın Müzik Grubu” ve “Zamansızdık” ile en iyi single ödülünü aldı.</blockquote>
+          <cite data-en="Crystal Deer Awards · 2025">Kristal Geyik Ödülleri · 2025</cite>
         </article>
         <article class="press" data-reveal>
           <div class="mark" aria-hidden="true">📈</div>
-          <blockquote>Manifestival albümünün 11 şarkısı da 24 saat içinde Spotify Türkiye Top 100’e girdi.</blockquote>
+          <blockquote data-en="All 11 songs from Manifestival entered Spotify Türkiye’s Top 100 within 24 hours.">Manifestival albümünün 11 şarkısı da 24 saat içinde Spotify Türkiye Top 100’e girdi.</blockquote>
           <cite>Spotify Türkiye</cite>
         </article>
         <article class="press" data-reveal style="--d:1">
           <div class="mark" aria-hidden="true">🌍</div>
-          <blockquote>Manifestival, 2025’in dünyada en çok dinlenen 3. kız grubu albümü oldu.</blockquote>
-          <cite>Küresel Stream Sıralaması</cite>
+          <blockquote data-en="Manifestival became the 3rd most-streamed girl-group album worldwide in 2025.">Manifestival, 2025’in dünyada en çok dinlenen 3. kız grubu albümü oldu.</blockquote>
+          <cite data-en="Global Streaming Chart">Küresel Stream Sıralaması</cite>
         </article>
         <article class="press" data-reveal style="--d:2">
           <div class="mark" aria-hidden="true">🔥</div>
-          <blockquote>YouTube Music ve Spotify’da toplam 480 milyonu aşan dinlenme.</blockquote>
-          <cite>480M+ Stream</cite>
+          <blockquote data-en="Over 480 million combined streams on YouTube Music and Spotify.">YouTube Music ve Spotify’da toplam 480 milyonu aşan dinlenme.</blockquote>
+          <cite data-en="480M+ Streams">480M+ Stream</cite>
         </article>
       </div>
     </div>
@@ -584,9 +585,9 @@
   <section id="sosyal">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <div class="eyebrow"><span class="num">07</span> Sosyal Medya</div>
-        <h2 class="h2">Bize <em>katıl</em></h2>
-        <p class="lead">Her platformda @m6nifestgirls — kamera arkası, canlı yayınlar ve daha fazlası.</p>
+        <div class="eyebrow"><span class="num">07</span> <span data-en="Social Media">Sosyal Medya</span></div>
+        <h2 class="h2" data-en-html="&lt;em&gt;Join&lt;/em&gt; us">Bize <em>katıl</em></h2>
+        <p class="lead" data-en="@m6nifestgirls on every platform — behind the scenes, live streams and more.">Her platformda @m6nifestgirls — kamera arkası, canlı yayınlar ve daha fazlası.</p>
       </div>
 
       <div class="social-grid">
@@ -617,20 +618,20 @@
         </a>
         <a class="soc soc--sh" href="https://share.stationhead.com/n10a8ez7h8as" target="_blank" rel="noopener" data-reveal style="--d:2">
           <span class="ic ic--sh"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9v5a3 3 0 0 0 3 3h1a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a7 7 0 0 1 14 0h-2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h1a3 3 0 0 0 3-3v-5a9 9 0 0 0-9-9z"/></svg></span>
-          <span><b>Stationhead</b><small>Canlı Yayınlar</small></span>
+          <span><b>Stationhead</b><small data-en="Live Streams">Canlı Yayınlar</small></span>
           <span class="arrow" aria-hidden="true">→</span>
         </a>
       </div>
 
       <div class="newsletter" data-reveal>
         <div>
-          <h3>Hiçbir haberi <em>kaçırma</em></h3>
-          <p>Yeni şarkılar, konser tarihleri ve sürprizler ilk önce senin kutunda olsun.</p>
+          <h3 data-en-html="Never miss &lt;em&gt;a beat&lt;/em&gt;">Hiçbir haberi <em>kaçırma</em></h3>
+          <p data-en="New songs, tour dates and surprises — straight to your inbox first.">Yeni şarkılar, konser tarihleri ve sürprizler ilk önce senin kutunda olsun.</p>
         </div>
         <div>
           <form class="newsletter-form" novalidate>
-            <input type="email" name="email" placeholder="E-posta adresin" autocomplete="email" required>
-            <button class="btn btn--grad" type="submit">Katıl</button>
+            <input type="email" name="email" placeholder="E-posta adresin" data-en-ph="Your email address" autocomplete="email" required>
+            <button class="btn btn--grad" type="submit" data-en="Join">Katıl</button>
           </form>
           <p class="newsletter-msg" role="status" aria-live="polite"></p>
         </div>
@@ -652,7 +653,7 @@
   </div>
   <div class="tt-info">
     <b class="tt-title">—</b>
-    <small class="tt-sub">Manifest · 30 sn önizleme</small>
+    <small class="tt-sub" data-en="Manifest · 30s preview">Manifest · 30 sn önizleme</small>
     <div class="tt-progress"><i></i></div>
   </div>
   <div class="tt-controls">
@@ -682,16 +683,16 @@
       <div class="mmodal-role"></div>
       <p class="mmodal-quote"></p>
       <p class="mmodal-bio"></p>
-      <div class="mmodal-sec">Künye</div>
+      <div class="mmodal-sec" data-en="Profile">Künye</div>
       <dl class="mmodal-facts"></dl>
       <div class="mmodal-actions">
         <button class="btn btn--grad mmodal-play" type="button">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
           Önizlemeyi Dinle
         </button>
-        <a class="mmodal-full" href="https://music.apple.com/tr/album/toz-pembe/6784751861?i=6784751987" target="_blank" rel="noopener">Tam şarkı ↗</a>
+        <a class="mmodal-full" href="https://music.apple.com/tr/album/toz-pembe/6784751861?i=6784751987" target="_blank" rel="noopener" data-en="Full song ↗">Tam şarkı ↗</a>
       </div>
-      <div class="mmodal-sec">Takip Et</div>
+      <div class="mmodal-sec" data-en="Follow">Takip Et</div>
       <div class="mmodal-socials"></div>
     </div>
   </div>
@@ -705,17 +706,17 @@
     <div class="footer-mid">
       <div class="footer-brand">
         <a href="#top" aria-label="Manifest — ana sayfa"><img src="assets/img/logo.svg" alt="Manifest"></a>
-        <p>Altı kız, bir enerji. Türkiye'nin en büyük kız grubu.</p>
+        <p data-en="Six girls, one energy. Türkiye’s biggest girl group.">Altı kız, bir enerji. Türkiye'nin en büyük kız grubu.</p>
       </div>
 
       <nav class="footer-nav" aria-label="Alt menü">
-        <a href="#hikaye">Hikâye</a>
-        <a href="#muzik">Müzik</a>
-        <a href="#uyeler">Üyeler</a>
-        <a href="#video">Video</a>
-        <a href="#konser">Konser</a>
-        <a href="#haberler">Haberler</a>
-        <a href="#sosyal">Sosyal</a>
+        <a href="#hikaye" data-en="Story">Hikâye</a>
+        <a href="#muzik" data-en="Music">Müzik</a>
+        <a href="#uyeler" data-en="Members">Üyeler</a>
+        <a href="#video" data-en="Video">Video</a>
+        <a href="#konser" data-en="Tour">Konser</a>
+        <a href="#haberler" data-en="Awards">Haberler</a>
+        <a href="#sosyal" data-en="Social">Sosyal</a>
       </nav>
 
       <div class="footer-socials">
@@ -728,11 +729,11 @@
     </div>
 
     <div class="footer-bottom">
-      <span>© <span id="year">2026</span> Manifest / Hypers Music. Tüm hakları saklıdır.</span>
+      <span>© <span id="year">2026</span> Manifest / Hypers Music. <span data-en="All rights reserved.">Tüm hakları saklıdır.</span></span>
       <span>
-        <a href="https://manifestgirlband.com/tr/gizlilik-politikasi/" target="_blank" rel="noopener">Gizlilik Politikası</a>
+        <a href="https://manifestgirlband.com/tr/gizlilik-politikasi/" target="_blank" rel="noopener" data-en="Privacy Policy">Gizlilik Politikası</a>
         &nbsp;·&nbsp;
-        <a href="https://manifestgirlband.com/tr/cerez-politikasi/" target="_blank" rel="noopener">Çerez Politikası</a>
+        <a href="https://manifestgirlband.com/tr/cerez-politikasi/" target="_blank" rel="noopener" data-en="Cookie Policy">Çerez Politikası</a>
       </span>
     </div>
   </div>

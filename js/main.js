@@ -57,6 +57,39 @@
     });
   }
 
+  /* ── Dil (TR/EN) ──────────────────────────────────────────
+     Her çevrilebilir eleman TR metnini içerir + İngilizcesini
+     data-en / data-en-html / data-en-ph attribute'ünde taşır.
+     İlk çağrıda TR değerleri saklanır, sonra iki yön arası geçilir.
+     window.__lang'i modal gibi JS üretimli metinler de okur. */
+  const LANG_KEY = 'manifest-lang';
+  const langBtn = $('.lang-toggle');
+  window.__lang = 'tr';
+  const setLang = lang => {
+    const en = lang === 'en';
+    $$('[data-en]').forEach(el => {
+      if (el.dataset.tr == null) el.dataset.tr = el.textContent;
+      el.textContent = en ? el.dataset.en : el.dataset.tr;
+    });
+    $$('[data-en-html]').forEach(el => {
+      if (el.dataset.trHtml == null) el.dataset.trHtml = el.innerHTML;
+      el.innerHTML = en ? el.dataset.enHtml : el.dataset.trHtml;
+    });
+    $$('[data-en-ph]').forEach(el => {
+      if (el.dataset.trPh == null) el.dataset.trPh = el.placeholder;
+      el.placeholder = en ? el.dataset.enPh : el.dataset.trPh;
+    });
+    document.documentElement.lang = lang;
+    window.__lang = lang;
+    if (langBtn) langBtn.textContent = en ? 'TR' : 'EN';
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
+  };
+  let savedLang = 'tr';
+  try { savedLang = localStorage.getItem(LANG_KEY) || 'tr'; } catch (e) {}
+  setLang(savedLang);
+  langBtn?.addEventListener('click', () => setLang(window.__lang === 'en' ? 'tr' : 'en'));
+
   /* ── Nav: scrolled state, progress bar, back-to-top ─────── */
   const nav = $('.nav');
   const progress = $('.progress');
@@ -373,6 +406,34 @@
     },
   ];
 
+  // Modal içeriğinin İngilizcesi (idx MEMBER_DATA ile aynı sırada)
+  const MEMBER_EN = [
+    { color: 'Yellow', role: 'Main Dancer',
+      bio: 'A licensed competitor in international dancesport, Esin spent years as a professional dancer and instructor. She graduated in Psychology from Doğuş University. On the Big5 Türkiye stage she stood out with flawless technique and stage command; today she is the backbone of Manifest’s choreography as its main dancer.',
+      facts: [['Birth', '9 August 2000'], ['Hometown', 'Istanbul'], ['Zodiac', 'Leo'], ['Education', 'Doğuş Univ. · Psychology'], ['Background', 'Licensed dancesport athlete'], ['Role', 'Main Dancer']] },
+    { color: 'Purple', role: 'Lead Dancer',
+      bio: 'A Computer Engineering graduate of Istanbul Technical University, Hilal made solo K-pop music under the stage name “Pinkeu” before Manifest and was known as a K-pop dance instructor. As one of the pioneers of K-pop culture in Türkiye, she brings the group both dance discipline and a storm-like stage energy.',
+      facts: [['Birth', '20 May 2001'], ['Hometown', 'Istanbul'], ['Zodiac', 'Taurus'], ['Education', 'ITU · Computer Eng.'], ['Background', 'Solo K-pop: “Pinkeu”'], ['Role', 'Lead Dancer']] },
+    { color: 'Pink', role: 'Lead Vocalist',
+      bio: 'Trained in piano and solfège from a young age, Lidya reached music by way of the theatre stage. She studies Russian Language and Literature at Yeditepe University. Besides being a lead vocalist, she creates behind the camera too: the directing experiments in Manifest’s videos are hers.',
+      facts: [['Birth', '24 June 2003'], ['Hometown', 'Istanbul'], ['Zodiac', 'Cancer'], ['Education', 'Yeditepe Univ. · Russian'], ['Background', 'Piano · Theatre · Directing'], ['Role', 'Lead Vocalist']] },
+    { color: 'Red', role: 'Vocalist · Dancer',
+      bio: 'Born in İzmir, Mina continued the dance journey she began with ballet into modern dance; before Manifest she performed as a professional dancer in music videos and on concert stages. She graduated in Arts and Cultural Management from Bilgi University. With her flame-like presence she keeps the group’s fire burning.',
+      facts: [['Birth', '16 May 2000'], ['Hometown', 'İzmir'], ['Zodiac', 'Taurus'], ['Education', 'Bilgi Univ. · Arts Mgmt.'], ['Background', 'Ballet · Professional dance'], ['Role', 'Vocalist · Dancer']] },
+    { color: 'Green', role: 'Main Vocalist',
+      bio: 'The youngest member and main vocalist. She began with ballet and continued with modern dance and hip-hop; she sang with the Magma Youth Choir. She graduated in Communication Design from Özyeğin University. With a boundless voice and infectious joy she sits at the heart of Manifest’s sound.',
+      facts: [['Birth', '23 August 2004'], ['Hometown', 'Istanbul'], ['Zodiac', 'Virgo'], ['Education', 'Özyeğin Univ. · Comm. Design'], ['Background', 'Choir · Ballet · Hip-hop'], ['Role', 'Main Vocalist']] },
+    { color: 'Blue', role: 'Vocalist · Dancer',
+      bio: 'Also known by the stage name “Zoktay”, Zeynep performed as a professional dancer before Manifest. She graduated in Public Relations and Publicity from Marmara University. With calm confidence and unshakeable energy she balances the group; a quiet but deep force.',
+      facts: [['Birth', '18 April 2001'], ['Hometown', 'Istanbul'], ['Zodiac', 'Aries'], ['Education', 'Marmara Univ. · Public Relations'], ['Background', 'Dancer · Stage name “Zoktay”'], ['Role', 'Vocalist · Dancer']] },
+  ];
+  const MODAL_T = {
+    tr: { tpLabel: '🎵 Toz Pembe’de gerçekten söylediği an: ', join: ' ve ',
+          playOwn: 'Kendi Anını Dinle', playPrev: 'Önizlemeyi Dinle' },
+    en: { tpLabel: '🎵 Sung live in Toz Pembe at: ', join: ' & ',
+          playOwn: 'Play Their Part', playPrev: 'Play Preview' },
+  };
+
   /* ── Pikap: kapaktan plak çıkar, pikaba uçar, çalar ───────
      Şarkı kartına tıkla → kapağın içinden plak kayar, ekranın
      altındaki pikaba uçar, iğne plağa iner ve iTunes'un resmî
@@ -531,29 +592,33 @@
 
     const openModal = idx => {
       mIdx = idx;
-      const d = MEMBER_DATA[idx];
-      panel.style.setProperty('--mc', d.mc);
-      panel.style.setProperty('--tint', d.tint);
-      elPhoto.src = d.img;
-      elPhoto.alt = d.name;
-      elGhost.textContent = d.name.split(' ')[0];
-      elName.textContent = d.name;
+      const base = MEMBER_DATA[idx];
+      const lang = window.__lang === 'en' ? 'en' : 'tr';
+      const tx = MODAL_T[lang];
+      // dil EN ise çevrilmiş alanları üzerine bindir
+      const d = lang === 'en' ? { ...base, ...MEMBER_EN[idx] } : base;
+      panel.style.setProperty('--mc', base.mc);
+      panel.style.setProperty('--tint', base.tint);
+      elPhoto.src = base.img;
+      elPhoto.alt = base.name;
+      elGhost.textContent = base.name.split(' ')[0];
+      elName.textContent = base.name;
       elRole.textContent = d.role;
-      elQuote.textContent = '🎵 Toz Pembe’de gerçekten söylediği an: ' + d.tp.join(' ve ');
+      elQuote.textContent = tx.tpLabel + base.tp.join(tx.join);
       elBio.textContent = d.bio;
-      elColorI.style.background = d.mc;
+      elColorI.style.background = base.mc;
       elColorB.textContent = d.color;
       elFacts.innerHTML = d.facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
       elSoc.innerHTML =
-        `<a href="https://www.instagram.com/${d.ig}/" target="_blank" rel="noopener">${IG_SVG} @${d.ig}</a>` +
-        `<a href="https://www.tiktok.com/@${d.tt}" target="_blank" rel="noopener">${TT_SVG} @${d.tt}</a>`;
+        `<a href="https://www.instagram.com/${base.ig}/" target="_blank" rel="noopener">${IG_SVG} @${base.ig}</a>` +
+        `<a href="https://www.tiktok.com/@${base.tt}" target="_blank" rel="noopener">${TT_SVG} @${base.tt}</a>`;
       playBtn.classList.remove('is-on');
       // her üye için ses çalar. Esin/Sueda kendi gerçek anını, diğerleri
       // şarkının resmî önizlemesini duyar; gerçek an rozette/altta yazılı.
       const playIcon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
-      playBtn.innerHTML = playIcon + (d.playable
-        ? 'Kendi Anını Dinle (' + d.tp[0] + ')'
-        : 'Önizlemeyi Dinle');
+      playBtn.innerHTML = playIcon + (base.playable
+        ? tx.playOwn + ' (' + base.tp[0] + ')'
+        : tx.playPrev);
       if (elFull) elFull.href = TOZ_PEMBE_URL;
       // önceki/sonraki üye etiketleri
       const L = MEMBER_DATA.length;
@@ -603,6 +668,10 @@
     });
     addEventListener('keydown', e => {
       if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+    // dil değişince açık modalı yeniden çiz
+    document.addEventListener('langchange', () => {
+      if (modal.classList.contains('is-open')) openModal(mIdx);
     });
 
     playBtn.addEventListener('click', () => {

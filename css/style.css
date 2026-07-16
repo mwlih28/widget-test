@@ -277,6 +277,17 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
 .nav-cta:hover { background: #2fbf71; box-shadow: 0 10px 30px rgba(47,191,113,.35); }
 .nav-cta svg { width: 16px; height: 16px; }
 
+.lang-toggle {
+  flex: none; margin-left: 4px;
+  min-width: 46px; height: 38px; padding: 0 14px;
+  border-radius: 100px; cursor: pointer;
+  border: 1px solid var(--line-2); background: rgba(255,255,255,.6);
+  font-family: var(--display); font-weight: 700; font-size: 12.5px;
+  letter-spacing: .08em; color: var(--text);
+  transition: background .25s, border-color .25s, color .25s, transform .25s;
+}
+.lang-toggle:hover { background: #131313; color: #fff; border-color: #131313; transform: translateY(-1px); }
+
 .burger {
   display: none; position: relative;
   width: 44px; height: 44px; border-radius: 50%;
