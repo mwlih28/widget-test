@@ -770,18 +770,24 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
 .sleeve-half {
   position: absolute; inset: 0; z-index: 3;
   background-size: cover; background-position: center;
-  transition: transform .65s var(--ease), filter .65s;
+  /* hafif taşmalı (springy) açılış: kapı savrulur, sonra oturur */
+  transition: transform .7s cubic-bezier(.3, 1.25, .42, 1), filter .7s;
   will-change: transform;
   pointer-events: none;
   backface-visibility: visible;   /* kapağın içi, baskının aynası gibi görünsün */
 }
 .sleeve-half.left  { clip-path: inset(0 50% 0 0); transform-origin: left center; }
-.sleeve-half.right { clip-path: inset(0 0 0 50%); transform-origin: right center; }
-.release.is-opening { z-index: 6; }
+.sleeve-half.right { clip-path: inset(0 0 0 50%); transform-origin: right center; transition-delay: .07s; }
+.release.is-opening { z-index: 6; transform: translateY(-8px) scale(1.02); }
 .release.is-opening, .release.is-opening .cover { overflow: visible; }
-.release.is-opening .sleeve-half.left  { transform: rotateY(-82deg); filter: brightness(.88); }
-.release.is-opening .sleeve-half.right { transform: rotateY(82deg);  filter: brightness(.88); }
+.release.is-opening .sleeve-half.left  { transform: rotateY(-82deg); filter: brightness(.86); }
+.release.is-opening .sleeve-half.right { transform: rotateY(82deg);  filter: brightness(.86); }
 .release.is-opening .cover img { opacity: 0 !important; }
+/* kılıfın içi: kâğıt dokusu + derinlik gölgesi */
+.release.is-opening .cover {
+  background: linear-gradient(180deg, #f7f5f0, #e7e4dc);
+  box-shadow: inset 0 0 44px rgba(17,17,17,.2);
+}
 .release.is-opening .new-tag,
 .release.is-opening .play { opacity: 0; }
 /* plak kapının içinden öne/yukarı süzülür */
@@ -793,16 +799,50 @@ body.cursor-hover .cursor-dot { scale: 2.2; }
 }
 .release.is-flying .disc-peek { opacity: 0 !important; transition: opacity .15s; }
 
-/* uçan plak (JS klonu) */
+/* uçan plak (JS klonu) — gerçek kapak etiketi + parlama + ayrı gölge */
 .fly-disc {
   position: fixed; z-index: 600; pointer-events: none;
   border-radius: 50%;
+  display: grid; place-items: center;
   background:
-    radial-gradient(circle, #3b3b3b 16%, transparent 16.5%),
-    radial-gradient(circle, transparent 6%, #111 6.5%),
-    repeating-radial-gradient(circle, #101010 0 2.5px, #1e1e1e 2.5px 4.5px);
-  box-shadow: 0 20px 50px rgba(0,0,0,.4);
+    radial-gradient(circle, #2a262e 17%, transparent 17.5%),
+    repeating-radial-gradient(circle, #0b0b0d 0 2.5px, #1c1c20 2.5px 4.5px),
+    #141416;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.5);
+  will-change: transform;
 }
+.fly-disc .fly-label {
+  width: 27%; height: 27%; border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px #f5f2ea, 0 0 0 3px rgba(0,0,0,.5);
+}
+.fly-disc::after {  /* dönüşle birlikte kayan ışık yansıması */
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg,
+    transparent 0 30deg, rgba(255,255,255,.22) 46deg, transparent 62deg,
+    transparent 205deg, rgba(255,255,255,.14) 222deg, transparent 240deg);
+}
+.fly-shadow {
+  position: fixed; z-index: 599; pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(17,17,17,.4), transparent 68%);
+  will-change: transform, opacity;
+}
+
+/* plak pikaba oturunca deck hafif sekip parlar */
+@keyframes deck-land {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(.93); }
+  62%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+@keyframes platter-flash {
+  0%   { box-shadow: 0 3px 8px rgba(17,17,17,.16), 0 0 0 0 rgba(238,106,167,.5); }
+  70%  { box-shadow: 0 3px 8px rgba(17,17,17,.16), 0 0 0 14px rgba(238,106,167,0); }
+  100% { box-shadow: 0 3px 8px rgba(17,17,17,.16), 0 0 0 0 rgba(238,106,167,0); }
+}
+.turntable.is-landing .tt-deck { animation: deck-land .5s var(--ease); }
+.turntable.is-landing .tt-platter { animation: platter-flash .6s var(--ease); }
 
 /* ── pikap (plak çalar) ─────────────────────────────────────── */
 .turntable {

@@ -479,28 +479,66 @@
       currentCard = null;
     };
 
-    /* plağın (o anki konumundan) pikaba uçuşu */
+    /* plağın (o anki konumundan) pikaba uçuşu.
+       Uçan klon gerçek kapağı etiket olarak taşır, dönerken üzerinde
+       ışık yansıması kayar, altında ayrı bir yer gölgesi süzülür ve
+       plak deck'e "oturunca" pikap hafifçe sekip parlar. */
     const flyDisc = (card, done) => {
       const r = $('.disc-peek', card).getBoundingClientRect();
       const size = r.width;
       const startX = r.left + size / 2;
       const startY = r.top + size / 2;
-      // pikap alttan ortalanmış; deck sol kenarda → hedefi hesapla
-      const dockW = Math.min(560, innerWidth - 28);
-      const endX = innerWidth / 2 - dockW / 2 + 18 + 43;
-      const endY = innerHeight - 20 - 57;
+      // pikap alttan ortalanmış; deck solda → plağın ineceği merkez
+      const dockW = Math.min(580, innerWidth - 28);
+      const endX = innerWidth / 2 - dockW / 2 + 14 + 47;
+      const endY = innerHeight - 22 - 14 - 47;
+      const VINYL = 84;                        // .tt-vinyl çapı
+      const endScale = VINYL / size;
+
       const disc = document.createElement('div');
       disc.className = 'fly-disc';
       disc.style.cssText = `left:0;top:0;width:${size}px;height:${size}px;`;
-      document.body.appendChild(disc);
+      const label = document.createElement('img');
+      label.className = 'fly-label';
+      label.src = $('.cover img', card).src;
+      label.alt = '';
+      disc.appendChild(label);
+      const shadow = document.createElement('div');
+      shadow.className = 'fly-shadow';
+      shadow.style.cssText = `left:0;top:0;width:${size}px;height:${size * .3}px;`;
+      document.body.append(shadow, disc);
+
+      const DUR = 980;
+      const midX = (startX + endX) / 2;
+      const peakY = Math.min(startY, endY) - 120;   // yayın tepe noktası
+      const at = (x, y, rot, sc) =>
+        `translate(${x - size / 2}px, ${y - size / 2}px) rotate(${rot}deg) scale(${sc})`;
+
+      // plak: yüksel → süzül → hedefi hafif aş → otur
       disc.animate([
-        { transform: `translate(${startX - size/2}px, ${startY - size/2}px) rotate(160deg) scale(1)`, opacity: 1 },
-        { transform: `translate(${(startX+endX)/2 - size/2}px, ${Math.min(startY,endY) - size/2 - 90}px) rotate(430deg) scale(${(76/size+1)/2})`, opacity: 1, offset: .55 },
-        { transform: `translate(${endX - 38}px, ${endY - 38}px) rotate(880deg) scale(${76/size})`, opacity: 1 },
-      ], { duration: 850, easing: 'cubic-bezier(.3,.7,.3,1)' }).onfinish = () => {
+        { transform: at(startX, startY, 160, 1.02), offset: 0 },
+        { transform: at(startX + (midX - startX) * .4, peakY + 24, 330, .96), offset: .3 },
+        { transform: at(midX, peakY, 470, (endScale + 1) / 2), offset: .5 },
+        { transform: at(endX + 10, endY - 26, 700, endScale * 1.12), offset: .82 },
+        { transform: at(endX, endY, 810, endScale), offset: 1 },
+      ], { duration: DUR, easing: 'cubic-bezier(.3,.55,.35,1)' }).onfinish = () => {
         disc.remove();
+        // iniş sekmesi + tabla parlaması
+        tt.classList.add('is-landing');
+        setTimeout(() => tt.classList.remove('is-landing'), 620);
         done();
       };
+
+      // yer gölgesi: plak yükselince küçülüp soluklaşır, inerken belirir
+      const sAt = (x, y, sc, op) =>
+        `translate(${x - size / 2}px, ${y - size * .15}px) scale(${sc})`;
+      const sh = shadow.animate([
+        { transform: sAt(startX, startY + size * .42, 1, 1), opacity: .55, offset: 0 },
+        { transform: sAt(midX, startY + size * .48, .5, 1), opacity: .12, offset: .5 },
+        { transform: sAt(endX, endY + 34, .55, 1), opacity: .38, offset: .88 },
+        { transform: sAt(endX, endY + 30, endScale * 1.1, 1), opacity: 0, offset: 1 },
+      ], { duration: DUR, easing: 'cubic-bezier(.3,.55,.35,1)' });
+      sh.onfinish = () => shadow.remove();
     };
 
     /* kapağı ikiye ayır, plak aradan çıksın, sonra uçsun */
@@ -523,8 +561,8 @@
       setTimeout(() => {                       // kapak açıldı, plak öne çıktı
         card.classList.add('is-flying');       // karttaki plağı gizle
         flyDisc(card, done);                   // klon pikaba uçar
-        setTimeout(() => card.classList.remove('is-opening', 'is-flying'), 620);
-      }, 560);
+        setTimeout(() => card.classList.remove('is-opening', 'is-flying'), 700);
+      }, 640);
     };
 
     $$('.release[data-audio]').forEach(card => {
